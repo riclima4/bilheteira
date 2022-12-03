@@ -1,0 +1,35 @@
+.menu {
+  background-color: rgba(255, 255, 255, 0.524);
+  min-height: 64px;
+  align-items: center;
+  padding: 1rem 3rem;
+
+  justify-content: space-between;
+}
+a:visited,
+a:link {
+  color: rgb(134, 0, 139);
+}
+.menuTitulo {
+  font-size: 30px;
+  color: rgb(134, 0, 139);
+  text-decoration: none;
+}
+.menuItems {
+  font-size: 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  color: rgb(80, 80, 80);
+  text-decoration: none;
+}
+.userImg {
+  border-radius: 50%;
+  width: 2.5rem;
+}
+.wrapper {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+}
