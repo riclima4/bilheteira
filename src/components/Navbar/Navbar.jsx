@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./navbar.css";
 
 export default function Navbar() {
@@ -6,24 +7,24 @@ export default function Navbar() {
     <div className="wrapper">
       <div className="flex menu">
         <div className="menuTitulo">
-          <a href="#">
+          <Link to="/">
             <i class="fa-solid fa-ticket"></i>
-          </a>
+          </Link>
         </div>
         <div className="menuItems flex">
           <div className="notificationsItem">
-            <a href="#">
+            <Link to="/">
               <i class="fa-solid fa-bell"></i>
-            </a>
+            </Link>
           </div>
           <div className="userIcon">
-            <a href="#">
+            <Link to="/login">
               <img
                 className="userImg"
                 src="https://www.w3schools.com/w3css/img_avatar3.png"
                 alt="userImg"
               />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
