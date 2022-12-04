@@ -1,28 +1,6 @@
-.DashboardContent {
-  width: 100%;
-  height: 90vh;
-  padding-top: 6rem;
-  background: linear-gradient(
-    0deg,
-    rgba(169, 93, 255, 1) 0%,
-    rgba(34, 164, 195, 1) 73%
-  );
-}
-.tituloText {
-  font-family: "Public Sans", sans-serif;
-  font-size: 30px;
-  color: white;
-  text-align: center;
-  margin-top: 20px;
-}
-.descText {
-  font-family: "Public Sans", sans-serif;
-  color: white;
-  text-align: center;
-}
 .tickets {
   border-radius: 4px;
-  margin-inline: 10rem;
+  margin-inline: 6rem;
   padding: 5px;
   background-color: rgb(255, 255, 255);
   margin-bottom: 10px;
@@ -69,4 +47,24 @@
   margin: 0 auto;
   font-size: larger;
   cursor: pointer;
+}
+
+/* Parte Responsiva  */
+@media screen and (max-width: 920px) {
+  .tickets {
+    margin-inline: 3rem;
+  }
+  .rightSide button {
+    width: 100%;
+  }
+  .titleAndDate {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media screen and (max-width: 480px) {
+  .tickets {
+    margin-inline: 1rem;
+    flex-direction: column;
+  }
 }
