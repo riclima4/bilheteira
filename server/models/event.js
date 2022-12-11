@@ -1,8 +1,8 @@
 import Sequelize from "sequelize";
 import { dbInstance } from "../config/db.js";
 
-const TicketModule = dbInstance.define("tickets", {
-  idTicket: {
+const EventModule = dbInstance.define("event", {
+  idEvent: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
@@ -11,22 +11,21 @@ const TicketModule = dbInstance.define("tickets", {
     type: Sequelize.STRING(50),
     allowNull: false,
   },
+  local: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  desc: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   date: {
     type: Sequelize.DATEONLY,
     allowNull: false,
   },
-  hour: {
-    type: Sequelize.TIME,
+  type: {
+    type: Sequelize.STRING,
     allowNull: false,
-  },
-  price: {
-    type: Sequelize.FLOAT,
-    allowNull: false,
-  },
-  availability: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-    defaultValue: true,
   },
 });
-export { TicketModule };
+export { EventModule };
