@@ -20,7 +20,7 @@ export default function Login() {
           <button>Entrar</button>
         </form>
         <p className="formDesc">
-          Se ainda não tem conta clica <Link to="/registar">aqui</Link>
+          Se ainda não tem conta clica <Link to="/register">aqui</Link>
         </p>
       </div>
     </div>

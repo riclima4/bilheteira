@@ -1,0 +1,60 @@
+.historico {
+  margin: 0 auto;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.595);
+  margin-bottom: 3rem;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.linha {
+  gap: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+.leftSideLinha {
+  gap: 3rem;
+  align-items: center;
+  margin-left: 3rem;
+}
+.linhaImg {
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  align-items: center;
+  object-fit: cover;
+}
+.rightSideLinha {
+  gap: 1rem;
+  align-items: center;
+  margin-right: 3rem;
+}
+.seeMoreBtn {
+  color: rgb(13, 151, 0);
+  font-size: large;
+  text-align: center;
+  padding: 0.7rem;
+  background-color: rgba(70, 218, 24, 0.379);
+  border: none;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+}
+.seeMoreBtn:hover {
+  box-shadow: rgba(40, 40, 41, 0.321) 0px 7px 29px 0px;
+}
+.trashBtn {
+  color: rgb(151, 0, 0);
+  font-size: large;
+  text-align: center;
+  padding: 0.8rem;
+  background-color: rgba(218, 24, 24, 0.379);
+  border: none;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+}
+.trashBtn:hover {
+  box-shadow: rgba(40, 40, 41, 0.321) 0px 7px 29px 0px;
+}

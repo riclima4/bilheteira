@@ -18,7 +18,7 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="userIcon">
-            <Link to="/login">
+            <Link to="/account">
               <img
                 className="userImg"
                 src="https://www.w3schools.com/w3css/img_avatar3.png"
