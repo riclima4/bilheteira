@@ -1,0 +1,94 @@
+.addBilhetesBtn {
+  background-color: rgb(32, 53, 209);
+  border: none;
+  padding: 13px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+.addBilhetesBtn:hover {
+  background-color: rgb(22, 39, 168);
+}
+.tituloAndBtn {
+  align-items: center;
+  justify-content: space-between;
+}
+.bilhetes {
+  margin: 0 auto;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.595);
+  margin-bottom: 3rem;
+  padding-inline: 10px;
+  padding-top: 10px;
+  border-radius: 5px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead tr {
+  border-radius: 5px;
+}
+thead th {
+  background-color: rgba(136, 136, 136, 0.595);
+}
+th {
+  padding: 20px;
+  text-align: left;
+  text-transform: uppercase;
+}
+tbody tr {
+  cursor: pointer;
+}
+tbody tr:hover {
+  background-color: rgba(174, 174, 174, 0.595);
+}
+td {
+  padding: 20px;
+  border-bottom: 1px solid black;
+}
+th,
+td {
+  border-bottom: 1px solid rgba(142, 142, 142, 0.66);
+}
+th input,
+td input {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+td:first-child {
+  text-align: center;
+  width: 1rem;
+}
+td:nth-child(2) {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+td:nth-child(3) {
+  max-width: 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+td:last-child {
+  width: 1rem;
+}
+.disponibilidadeAtiva {
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(13, 151, 0);
+  background-color: rgba(70, 218, 24, 0.379);
+  border-radius: 3px;
+  padding: 5px;
+  text-align: center;
+}
+.disponibilidadeDesativa {
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(151, 0, 0);
+  background-color: rgba(218, 24, 24, 0.379);
+  border-radius: 3px;
+  padding: 5px;
+  text-align: center;
+}

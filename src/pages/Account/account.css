@@ -1,0 +1,25 @@
+.AccountContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 3rem;
+  background: linear-gradient(
+    0deg,
+    rgba(169, 93, 255, 1) 0%,
+    rgba(34, 164, 195, 1) 73%
+  );
+}
+.userInfoRow {
+  justify-content: space-evenly;
+  background-color: rgba(255, 255, 255, 0.595);
+  width: 60%;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  align-items: center;
+  padding: 15px;
+  border-radius: 5px;
+}
+.userImgAccount {
+  border-radius: 50%;
+  width: 20rem;
+}
