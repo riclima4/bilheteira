@@ -5,8 +5,8 @@
   padding-bottom: 3rem;
   background: linear-gradient(
     0deg,
-    rgba(169, 93, 255, 1) 0%,
-    rgba(34, 164, 195, 1) 73%
+    rgba(34, 164, 195, 1) 0%,
+    rgba(169, 93, 255, 1) 73%
   );
 }
 .userInfoRow {
