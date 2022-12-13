@@ -1,33 +1,173 @@
-import React from "react";
+import React, { cloneElement, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { CssBaseline } from "@mui/material";
 
-export default function Navbar() {
+function ElevationScroll(props) {
+  const { children } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger();
+
+  return cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+export default function Navbar(props) {
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav();
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser();
+  };
   return (
-    <div className="wrapper">
-      <div className="flex menu">
-        <div className="menuTitulo">
-          <Link to="/">
-            <i class="fa-solid fa-ticket"></i>
-          </Link>
-        </div>
-        <div className="menuItems flex">
-          <div className="notificationsItem">
-            <Link to="/">
-              <i class="fa-solid fa-bell"></i>
-            </Link>
-          </div>
-          <div className="userIcon">
-            <Link to="/account">
-              <img
-                className="userImg"
-                src="https://www.w3schools.com/w3css/img_avatar3.png"
-                alt="userImg"
-              />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <CssBaseline />
+      <ElevationScroll {...props}>
+        <AppBar position="sticky" sx={{ bgcolor: "#3B3B3B" }}>
+          <Container maxWidth="xl">
+            <Toolbar disableGutters>
+              <Typography
+                variant="h4"
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                <Link to="/">
+                  <i class="fa-solid fa-ticket"></i>
+                </Link>
+              </Typography>
+
+              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: "block", md: "none" },
+                  }}
+                >
+                  <MenuItem>
+                    <Typography textAlign="center">pagina1</Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">pagina1</Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">pagina1</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+
+              <Typography
+                variant="h3"
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                }}
+              >
+                <Link to="/" className="logoTicket">
+                  <i class="fa-solid fa-ticket"></i>
+                </Link>
+              </Typography>
+              <Box
+                sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              ></Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Abrir Definições">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt="userImg"
+                      src="https://www.w3schools.com/w3css/img_avatar3.png"
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem>
+                    <Typography textAlign="center">
+                      <Link to="/account" className="linkUserMenu">
+                        Meu Perfil
+                      </Link>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </ElevationScroll>
+    </>
   );
 }

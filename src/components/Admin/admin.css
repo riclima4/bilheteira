@@ -1,3 +1,6 @@
+.MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+  outline: none !important;
+}
 .addBilhetesBtn {
   background-color: rgb(32, 53, 209);
   border: none;
@@ -22,9 +25,19 @@
   padding-top: 10px;
   border-radius: 5px;
 }
+.tabela {
+  width: 80%;
+  margin: 0 auto;
+  height: 631px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.595);
+  border-radius: 8px;
+  padding: 10px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
+  text-align: left;
 }
 thead tr {
   border-radius: 5px;
@@ -65,30 +78,17 @@ td:nth-child(2) {
   font-weight: bold;
   text-transform: capitalize;
 }
-td:nth-child(3) {
+td:nth-child(4) {
   max-width: 75px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: left;
+}
+td:nth-child(5) {
+  text-align: center;
 }
 td:last-child {
   width: 1rem;
-}
-.disponibilidadeAtiva {
-  font-weight: bold;
-  font-size: 18px;
-  color: rgb(13, 151, 0);
-  background-color: rgba(70, 218, 24, 0.379);
-  border-radius: 3px;
-  padding: 5px;
-  text-align: center;
-}
-.disponibilidadeDesativa {
-  font-weight: bold;
-  font-size: 18px;
-  color: rgb(151, 0, 0);
-  background-color: rgba(218, 24, 24, 0.379);
-  border-radius: 3px;
-  padding: 5px;
   text-align: center;
 }
