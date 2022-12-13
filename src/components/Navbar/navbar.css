@@ -8,28 +8,12 @@
 }
 a:visited,
 a:link {
-  color: rgb(134, 0, 139);
+  color: rgb(205, 0, 212);
 }
-.menuTitulo {
-  font-size: 30px;
-  color: rgb(134, 0, 139);
+.linkUserMenu {
   text-decoration: none;
+  color: black;
 }
-.menuItems {
-  font-size: 20px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  color: rgb(80, 80, 80);
-  text-decoration: none;
-}
-.userImg {
-  border-radius: 50%;
-  width: 2.5rem;
-}
-.wrapper {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1;
+.linkUserMenu:visited {
+  color: initial;
 }

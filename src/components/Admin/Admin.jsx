@@ -65,6 +65,7 @@ const columns = [
     renderCell: (cellValues) => {
       return (
         <Switch
+          defaultChecked
           variant="contained"
           color="primary"
           onClick={(event) => {
