@@ -1,8 +1,7 @@
 import { TicketModule } from "../models/tickets.js";
 
 export const getALLTickets = async (req, res) => {
-    const tickets = await TicketModule.findAll();
+  const tickets = await TicketModule.findAll();
 
-    return res.send({ users });
+  return res.send({ tickets });
 };
-

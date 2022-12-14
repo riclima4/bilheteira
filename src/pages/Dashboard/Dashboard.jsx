@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import Event from "../../components/Evento/Event";
 import { Grid } from "@mui/material";
+import axios from "axios";
 
 export default function Dashboard() {
   return (
@@ -22,30 +23,7 @@ export default function Dashboard() {
             justifyContent: "center",
           }}
         >
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
+          <Event />
         </Grid>
       </div>
     </div>
