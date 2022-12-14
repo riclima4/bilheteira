@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./dashboard.css";
 import Event from "../../components/Evento/Event";
 import { Grid } from "@mui/material";
-import axios from "axios";
 
 export default function Dashboard() {
   return (

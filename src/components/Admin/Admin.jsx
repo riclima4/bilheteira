@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./admin.css";
 import { Button, Switch } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import axios from "axios";
 
 const handleBilhetes = (event, cellValues) => {
   //buscar o id do evento
@@ -19,6 +20,7 @@ const handleCellClick = (param, event) => {
 const handleRowClick = (param, event) => {
   event.stopPropagation();
 };
+
 const columns = [
   {
     field: "id",
@@ -79,19 +81,27 @@ const columns = [
   },
 ];
 
-const rows = [
-  { id: 1, evento: "Snow", sessoes: 2 },
-  { id: 2, evento: "Lannister", sessoes: 3 },
-  { id: 3, evento: "Lannistera", sessoes: 6 },
-  { id: 4, evento: "Stark", sessoes: 1 },
-  { id: 5, evento: "Targaryen", sessoes: 1 },
-  { id: 6, evento: "Melisandre", sessoes: 1 },
-  { id: 7, evento: "Clifford", sessoes: 2 },
-  { id: 8, evento: "Frances", sessoes: 4 },
-  { id: 9, evento: "Roxie", sessoes: 5 },
-  { id: 10, evento: "asdasd", sessoes: 5 },
-];
 export default function Admin() {
+  const urlEvents = "http://localhost:4242/api/events";
+  const [eventos, setEventos] = useState([]);
+  const rows = [];
+  const getData = async () => {
+    const res = await axios.get(urlEvents);
+    if (!res) return;
+    console.log(res.data);
+    setEventos(res.data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  eventos.map((e) => {
+    const obj = { id: e.idEvent, evento: e.title, sessoes: e.sessoes };
+    rows.push(obj);
+    console.log(rows);
+  });
+
   return (
     <>
       <div className="flex tituloSection tituloAndBtn">
