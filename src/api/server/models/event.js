@@ -11,6 +11,10 @@ const EventModule = dbInstance.define("event", {
     type: Sequelize.STRING(50),
     allowNull: false,
   },
+  sessoes: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
   local: {
     type: Sequelize.STRING,
     allowNull: false,

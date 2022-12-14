@@ -22,30 +22,7 @@ export default function Dashboard() {
             justifyContent: "center",
           }}
         >
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <Event />
-          </Grid>
+          <Event />
         </Grid>
       </div>
     </div>
