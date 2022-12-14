@@ -1,6 +1,5 @@
 import Sequelize from "sequelize";
 import { dbInstance } from "../config/db.js";
-
 const TicketModule = dbInstance.define("tickets", {
   idTicket: {
     type: Sequelize.INTEGER,
