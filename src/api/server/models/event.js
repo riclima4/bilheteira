@@ -31,5 +31,10 @@ const EventModule = dbInstance.define("event", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  availability: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
+  },
 });
 export { EventModule };

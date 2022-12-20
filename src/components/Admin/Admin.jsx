@@ -8,9 +8,10 @@ const handleBilhetes = (event, cellValues) => {
   //buscar o id do evento
   console.log(cellValues.row.id);
 };
+
 const handleToggle = (event, cellValues) => {
-  //buscar o id do evento
-  console.log(cellValues.row.disponibilidade);
+  //buscar a disponibilidade
+  console.log(cellValues.row.availability);
 };
 
 const handleCellClick = (param, event) => {
@@ -67,10 +68,11 @@ const columns = [
     renderCell: (cellValues) => {
       return (
         <Switch
-          defaultChecked
+          checked={cellValues.row.availability}
           variant="contained"
           color="primary"
-          onClick={(event) => {
+          value="active"
+          onChange={(event) => {
             handleToggle(event, cellValues);
           }}
         >
@@ -97,7 +99,12 @@ export default function Admin() {
   }, []);
 
   eventos.map((e) => {
-    const obj = { id: e.idEvent, evento: e.title, sessoes: e.sessoes };
+    const obj = {
+      id: e.idEvent,
+      evento: e.title,
+      sessoes: e.sessoes,
+      availability: e.availability,
+    };
     rows.push(obj);
     console.log(rows);
   });
@@ -114,7 +121,6 @@ export default function Admin() {
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection
           disableColumnFilter
@@ -123,69 +129,6 @@ export default function Admin() {
           onRowClick={handleRowClick}
         />
       </div>
-
-      {/* <div className="flex tituloSection tituloAndBtn">
-        <h1>Bilhetes</h1>
-        <button className="addBilhetesBtn">
-          <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
-      <div className="bilhetes">
-        <table className="tabelaBilhetes">
-          <thead>
-            <tr>
-              <th>
-                <input type="checkbox" />
-              </th>
-              <th>Evento</th>
-              <th>Sessão</th>
-              <th>Descrição</th>
-              <th>Hora</th>
-              <th>Disponibilidade</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>EventoNome</td>
-              <td>Sessao</td>
-              <td>
-                descTestedescTestedescTestedescTestedescTestedescTestedescTestedescTestedescTestedescTestedescTestedescTestedescTestedescTestedescTeste
-              </td>
-              <td>Hora</td>
-              <td>
-                <div className="disponibilidadeAtiva">Ativo</div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>EventoNome</td>
-              <td>Sessao</td>
-              <td>descTeste</td>
-              <td>Hora</td>
-              <td>
-                <div className="disponibilidadeDesativa">Desativo</div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>EventoNome</td>
-              <td>Sessao</td>
-              <td>descTeste</td>
-              <td>Hora</td>
-              <td>
-                <div className="disponibilidadeAtiva">Ativo</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div> */}
     </>
   );
 }
