@@ -23,27 +23,29 @@ export default function Event() {
     getData();
   }, []);
   return eventos.map((evento) => {
-    return (
-      <Grid item xs={12} sm={6} md={4} lg={3} key={evento.idEvent}>
-        <Card>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="245"
-              image={festivalImg}
-              alt="evento"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {evento.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {evento.desc}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Grid>
-    );
+    if (evento.sessoes > 0) {
+      return (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={evento.idEvent}>
+          <Card>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="245"
+                image={festivalImg}
+                alt="evento"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {evento.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {evento.desc}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      );
+    }
   });
 }

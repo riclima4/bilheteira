@@ -9,11 +9,9 @@ const handleBilhetes = (event, cellValues) => {
   console.log(cellValues.row.id);
 };
 
-const putToggle = (event, cellValues) => {
-  if (cellValues.row.availability == true) {
-  }
+const handleToggle = (event, cellValues) => {
   //buscar a disponibilidade
-  console.log();
+  console.log(cellValues.row.availability);
 };
 
 const handleCellClick = (param, event) => {
@@ -70,11 +68,11 @@ const columns = [
     renderCell: (cellValues) => {
       return (
         <Switch
-          defaultChecked
+          checked={cellValues.row.availability}
           variant="contained"
           color="primary"
           value="active"
-          onClick={(event) => {
+          onChange={(event) => {
             handleToggle(event, cellValues);
           }}
         >

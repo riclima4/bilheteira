@@ -19,5 +19,10 @@ const UserModel = dbInstance.define("users", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  type: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 1,
+  },
 });
 export { UserModel };
