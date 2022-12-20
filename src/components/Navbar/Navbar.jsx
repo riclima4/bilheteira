@@ -154,7 +154,11 @@ export default function Navbar(props) {
                 >
                   <MenuItem>
                     <Typography textAlign="center">
-                      <Link to="/account" className="linkUserMenu">
+                      <Link
+                        to="/account"
+                        onClick={handleCloseUserMenu}
+                        className="linkUserMenu"
+                      >
                         Meu Perfil
                       </Link>
                     </Typography>
