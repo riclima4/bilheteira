@@ -6,6 +6,15 @@ export const getALLTickets = async (req, res) => {
   return res.send({ tickets });
 };
 
+export const getTicketid = async (req, res) => {
+  const idTicket = req.params.idTicket;
+  const tickets = await TicketModule.findByPk(idTicket);
+  if (tickets === null) {
+    res.send("Não existe tickets com id: " + idTicket);
+  }
+  res.send({ tickets });
+};
+
 export const deleteTickets = async (req, res) => {
   const idTicket = req.params.idTicket;
   const ticket = await TicketModule.findByPk(idTicket);
