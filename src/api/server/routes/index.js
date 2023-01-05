@@ -53,10 +53,10 @@ routes.post("/createEvent", createEvents);
 routes.put("/updateEvents/:idEvent", updateEvents);
 
 routes.get("/history", getALLHistory);
-routes.get("/history/:id", getHistoryid);
+routes.get("/history/:idHistory", getHistoryid);
 routes.delete("/createHistory", newHistory);
-routes.post("/updaeHistory/:id", updateHistory);
-routes.put("/deleteHistory/:id", deleteHistory);
+routes.post("/updaeHistory/:idHistory", updateHistory);
+routes.put("/deleteHistory/:idHistory", deleteHistory);
 
 routes.post("/auth", login);
 export { routes };
