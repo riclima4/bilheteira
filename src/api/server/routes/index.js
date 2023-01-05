@@ -5,6 +5,7 @@ import {
   createTicket,
   updateTicket,
   getTicketid,
+  getTicketByEvent,
 } from "../controllers/tickets.js";
 import {
   getALLEvents,
@@ -41,6 +42,7 @@ routes.delete("/deleteUser/:id", deleteUsers);
 
 routes.get("/tickets", getALLTickets);
 routes.get("/tickets/:id", getTicketid);
+routes.get("/ticket/event/:idEvent", getTicketByEvent);
 routes.delete("/deleteTickets/:idTicket", deleteTickets);
 routes.post("/createTicket", createTicket);
 routes.put("/updateTicket/:idTicket", updateTicket);
