@@ -10,6 +10,7 @@ import {
   deleteEvents,
   createEvents,
   updateEvents,
+  getEventByID,
 } from "../controllers/events.js";
 import { getALLUsers, login } from "../controllers/users.js";
 import { authRequired } from "../utils/jwt.js";
@@ -25,6 +26,7 @@ routes.put("/createTicket", createTicket);
 routes.put("/updateTicket/:idTicket", updateTicket);
 
 routes.get("/events", getALLEvents);
+routes.get("/event/:idEvent", getEventByID);
 routes.delete("/deleteEvents/:idEvent", deleteEvents);
 routes.put("/createEvent", createEvents);
 routes.put("/updateEvents/:idEvent", updateEvents);

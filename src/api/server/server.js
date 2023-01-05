@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import "dotenv/config.js";
-import { routes } from "./routes/index.js"
+import { routes } from "./routes/index.js";
 import { dbInstance } from "./config/db.js";
 
 //TODO: ROUTES VÃO SER COLOCADOS AQUI!
@@ -11,11 +11,11 @@ import { dbInstance } from "./config/db.js";
 const app = express();
 
 // client can be postman | react website | react localhost link | etc
-const clientURL = "http://localhost:5500";
+const clientURL = "*";
 
 // CORS options
 const corsOptions = {
-    origin: clientURL,
+  origin: clientURL,
 };
 app.use(cors(corsOptions));
 
@@ -26,21 +26,20 @@ app.use(morgan("short"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 //--ROUTES--//
 app.use("/api", routes);
 
 try {
-    dbInstance.sync({ force: false, alter: true })
+  dbInstance.sync({ force: false, alter: true });
 } catch (error) {
-    console.log(error)
+  console.log(error);
 }
 
 // correr server no url host:port definido em .env
 app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
-    console.log(
-        "Server up and running at http://%s:%s",
-        process.env.SERVER_HOST,
-        process.env.SERVER_PORT
-    );
+  console.log(
+    "Server up and running at http://%s:%s",
+    process.env.SERVER_HOST,
+    process.env.SERVER_PORT
+  );
 });
