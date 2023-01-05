@@ -1,5 +1,6 @@
 import Sequelize from "sequelize";
 import { dbInstance } from "../config/db.js";
+import { TicketModule } from "./tickets.js";
 
 const EventModule = dbInstance.define("event", {
   idEvent: {
