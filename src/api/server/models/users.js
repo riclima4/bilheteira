@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import { dbInstance } from "../config/db.js";
 
 const UserModel = dbInstance.define("users", {
-  id: {
+  idUser: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,

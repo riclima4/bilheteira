@@ -1,9 +1,32 @@
+import { where } from "sequelize";
 import { TicketModule } from "../models/tickets.js";
 
 export const getALLTickets = async (req, res) => {
   const tickets = await TicketModule.findAll();
 
   return res.send({ tickets });
+};
+
+export const getTicketid = async (req, res) => {
+  const idTicket = req.params.idTicket;
+  const tickets = await TicketModule.findByPk(idTicket);
+  if (tickets === null) {
+    res.send("Não existe tickets com id: " + idTicket);
+  }
+  res.send({ tickets });
+};
+
+export const getTicketByEvent = async (req, res) => {
+  const idEvent = req.params.idEvent;
+  const tickets = await TicketModule.findAll({
+    where: {
+      idEvent: idEvent,
+    },
+  });
+  if (tickets === null) {
+    res.send("Não existe tickets com id: " + idEvent);
+  }
+  res.send({ tickets });
 };
 
 export const deleteTickets = async (req, res) => {
