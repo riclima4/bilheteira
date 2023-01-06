@@ -5,6 +5,12 @@ export const getALLEvents = async (req, res) => {
 
   return res.send(events);
 };
+export const getEventByID = async (req, res) => {
+  const idEvent = req.params.idEvent;
+  const events = await EventModule.findByPk(idEvent);
+
+  return res.send(events);
+};
 
 export const deleteEvents = async (req, res) => {
   const idEvent = req.params.idEvent;
