@@ -29,16 +29,19 @@ import {
   updateHistory,
 } from "../controllers/history.js";
 import { authRequired } from "../utils/jwt.js";
+import { userRoutes } from "./users.js";
 
 const routes = Router();
 
-routes.get("/", authRequired, getALLUsers);
+// routes.get("/", authRequired, getALLUsers);
 
-routes.get("/users", getALLUsers);
-routes.get("/user/:id", getUserid);
-routes.post("/newUser", newUser);
-routes.put("/updateUser/:id", updateUser);
-routes.delete("/deleteUser/:id", deleteUsers);
+// routes.get("/users", getALLUsers);
+// routes.get("/user/:id", getUserid);
+// routes.post("/newUser", newUser);
+// routes.put("/updateUser/:id", updateUser);
+// routes.delete("/deleteUser/:id", deleteUsers);
+
+routes.use("/users", userRoutes);
 
 routes.get("/tickets", getALLTickets);
 routes.get("/tickets/:id", getTicketid);
