@@ -5,7 +5,7 @@ import {
     newUser,
     updateUser,
     deleteUsers,
-} from "../controllers/tickets.js";
+} from "../controllers/users.js";
 
 const userRoutes = Router();
 
