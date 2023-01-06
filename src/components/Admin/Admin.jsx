@@ -42,7 +42,7 @@ export default function Admin() {
       field: "id",
       headerName: "ID",
       flex: 0.5,
-      minWidth: 70,
+
       headerClassName: "super-app-theme--header",
     },
     { field: "evento", headerName: "Evento", flex: 1, minWidth: 90 },
@@ -50,14 +50,14 @@ export default function Admin() {
       field: "sessoes",
       headerName: "Sessões",
       flex: 1,
-      minWidth: 100,
+
       align: "left",
     },
     {
       field: "bilhetes",
       headerName: "Bilhetes",
       flex: 1,
-      minWidth: 150,
+
       sortable: false,
       renderCell: (cellValues) => {
         return (
@@ -73,7 +73,7 @@ export default function Admin() {
       field: "verBilhete",
       headerName: "Ver Mais",
       flex: 1,
-      minWidth: 50,
+
       sortable: false,
       renderCell: (cellValues) => {
         return (
