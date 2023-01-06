@@ -70,7 +70,7 @@ export default function Admin() {
       },
     },
     {
-      field: "verBilhete",
+      field: "verEvento",
       headerName: "Ver Mais",
       flex: 1,
 

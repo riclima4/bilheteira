@@ -44,6 +44,7 @@ routes.delete("/deleteUser/:id", deleteUsers);
 routes.get("/tickets", getALLTickets);
 routes.get("/tickets/:idTicket", getTicketid);
 routes.get("/ticket/event/:idEvent", getTicketByEvent);
+routes.get("/ticketsByEventAdmin/:idEvent", getTicketByEvent);
 routes.delete("/deleteTickets/:idTicket", deleteTickets);
 routes.post("/createTicket", createTicket);
 routes.put("/updateTicket/:idTicket", updateTicket);
