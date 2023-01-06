@@ -1,0 +1,8 @@
+.linkCard {
+  text-decoration: none;
+  color: black;
+}
+.linkCard:link,
+.linkCard:visited {
+  color: black;
+}

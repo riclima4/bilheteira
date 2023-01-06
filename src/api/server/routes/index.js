@@ -12,6 +12,7 @@ import {
   deleteEvents,
   createEvents,
   updateEvents,
+  getEventByID,
 } from "../controllers/events.js";
 import {
   deleteUsers,
@@ -41,13 +42,14 @@ routes.put("/updateUser/:id", updateUser);
 routes.delete("/deleteUser/:id", deleteUsers);
 
 routes.get("/tickets", getALLTickets);
-routes.get("/tickets/:id", getTicketid);
+routes.get("/tickets/:idTicket", getTicketid);
 routes.get("/ticket/event/:idEvent", getTicketByEvent);
 routes.delete("/deleteTickets/:idTicket", deleteTickets);
 routes.post("/createTicket", createTicket);
 routes.put("/updateTicket/:idTicket", updateTicket);
 
 routes.get("/events", getALLEvents);
+routes.get("/event/:idEvent", getEventByID);
 routes.delete("/deleteEvents/:idEvent", deleteEvents);
 routes.post("/createEvent", createEvents);
 routes.put("/updateEvents/:idEvent", updateEvents);
