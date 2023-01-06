@@ -42,7 +42,7 @@ routes.put("/updateUser/:id", updateUser);
 routes.delete("/deleteUser/:id", deleteUsers);
 
 routes.get("/tickets", getALLTickets);
-routes.get("/tickets/:id", getTicketid);
+routes.get("/tickets/:idTicket", getTicketid);
 routes.get("/ticket/event/:idEvent", getTicketByEvent);
 routes.delete("/deleteTickets/:idTicket", deleteTickets);
 routes.post("/createTicket", createTicket);

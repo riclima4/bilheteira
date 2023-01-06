@@ -92,3 +92,8 @@ td:last-child {
   width: 1rem;
   text-align: center;
 }
+@media only screen and (max-width: 900px) {
+  .tabela {
+    width: 90%;
+  }
+}

@@ -54,7 +54,7 @@ const columns = [
             handleBilhetes(event, cellValues);
           }}
         >
-          ver Bilhetes
+          Ver
         </Button>
       );
     },
@@ -106,7 +106,7 @@ export default function Admin() {
       availability: e.availability,
     };
     rows.push(obj);
-    console.log(rows);
+    // console.log(rows);
   });
 
   return (

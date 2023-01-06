@@ -26,7 +26,7 @@ export const getTicketByEvent = async (req, res) => {
   if (tickets === null) {
     res.send("Não existe tickets com id: " + idEvent);
   }
-  res.send({ tickets });
+  res.send(tickets);
 };
 
 export const deleteTickets = async (req, res) => {

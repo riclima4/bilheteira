@@ -58,3 +58,17 @@
 .trashBtn:hover {
   box-shadow: rgba(40, 40, 41, 0.321) 0px 7px 29px 0px;
 }
+
+@media only screen and (max-width: 900px) {
+  .historico {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .leftSideLinha {
+    flex-direction: column;
+    gap: 2px;
+    padding: 5px;
+    margin: 0 auto;
+  }
+}

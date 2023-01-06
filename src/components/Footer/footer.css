@@ -14,9 +14,11 @@ footer {
   align-items: center;
   gap: 60%;
   height: 100%;
+  padding-inline: 2rem;
 }
 .rights {
   margin-top: 1rem;
+  font-size: 20px;
 }
 
 .socials {
@@ -25,7 +27,25 @@ footer {
   gap: 2rem;
 }
 @media only screen and (max-width: 1800px) {
-  footer{
+  footer {
     height: 100px;
+  }
+}
+@media only screen and (max-width: 1500px) {
+  .footer-content {
+    gap: 40%;
+  }
+}
+@media only screen and (max-width: 950px) {
+  .footer-content {
+    gap: 30%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .footer-content {
+    gap: 10%;
+  }
+  .rights {
+    font-size: 15px;
   }
 }
