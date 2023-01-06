@@ -1,4 +1,5 @@
 import Router from "express";
+// import { userRoutes } from "./users.js";
 import {
   getALLTickets,
   deleteTickets,
@@ -40,6 +41,8 @@ routes.get("/user/:id", getUserid);
 routes.post("/newUser", newUser);
 routes.put("/updateUser/:id", updateUser);
 routes.delete("/deleteUser/:id", deleteUsers);
+
+// routes.use("/users", userRoutes);
 
 routes.get("/tickets", getALLTickets);
 routes.get("/tickets/:idTicket", getTicketid);
