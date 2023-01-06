@@ -92,8 +92,31 @@ td:last-child {
   width: 1rem;
   text-align: center;
 }
+.inputEvent {
+  gap: 10px;
+}
+.modalStyle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 24px;
+  padding: 20px;
+}
+.tituloInputEvent {
+  justify-content: space-between;
+}
+a:link {
+  text-decoration: none;
+}
 @media only screen and (max-width: 900px) {
   .tabela {
     width: 90%;
+  }
+  .modalStyle {
+    width: 85%;
   }
 }
