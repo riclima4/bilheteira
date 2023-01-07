@@ -62,28 +62,48 @@ export const deleteUsers = async (req, res) => {
   }
 };
 
+// export const login = async (req, res) => {
+//   const { username, password } = req.body;
+
+//   const user = await UserModel.findOne({
+//     where: {
+//       username: username,
+//       password: password,
+//     },
+//   });
+//   if (!user) {
+//     return res.status(500).json({
+//       message: "CREDENCIAIS ERRADAS",
+//     });
+//   }
+//   const token = createToken({
+//     id: user.id,
+//     username: user.username,
+//   });
+//   return res.send({
+//     message: "LOGIN FEITO",
+//     token,
+//   });
+// };
+
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  // if (!user || username.length <  4)
+  const userWithEmail = await UserModel.findOne({ where: { email } }).catch(
+    (err) => {
+      console.log("Error", err);
+    }
+  );
 
-  const user = await UserModel.findOne({
-    where: {
-      username: username,
-      password: password,
-    },
-  });
-  if (!user) {
-    return res.status(500).json({
-      message: "CREDENCIAIS ERRADAS",
-    });
-  }
-  const token = createToken({
-    id: user.id,
-    username: user.username,
-  });
-  return res.send({
-    message: "LOGIN FEITO",
-    token,
-  });
+  if (!userWithEmail)
+    return res.status(400).json({ message: "Email or password errados" });
+
+  if (!userWithEmail.password !== password)
+    return res.status(400).json({ message: "Email or password errados" });
+
+  const jwToken = jwt.sign(
+    { id: userWithEmail.id, email: userWithEmail.email },
+    process.env.JWT_SECRET
+  );
+  res.json({ message: "Welcome", token: jwToken });
 };
