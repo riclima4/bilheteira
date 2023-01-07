@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./eventPageAdmin.css";
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  MenuItem,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Footer from "../../components/Footer/Footer";
 import { useParams } from "react-router-dom";
 import festivalImg from "../../assets/festivalEx.jpg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import axios from "axios";
 export default function EventPageAdmin() {
   const { id } = useParams();
@@ -17,23 +26,46 @@ export default function EventPageAdmin() {
   const [ticketByEvent, setTicketByEvent] = useState([]);
   const [createModal, setCreateModal] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
-
   const [ticketItem, setTicketItem] = useState({});
+  const [editEnable, setEditEnable] = useState(true);
+  const [hideBtn, setHideBtn] = useState("none");
+
+  const enableEdit = () => {
+    setEditEnable(!editEnable);
+    if (editEnable) {
+      setHideBtn("");
+    } else {
+      setHideBtn("none");
+    }
+  };
 
   const handleOpenModalEdit = (ticket) => {
     setOpenModalEdit(true);
     setTicketItem(ticket);
   };
-  const handleCloseModalEdit = () => setOpenModalEdit(false);
+  const handleCloseModalEdit = () => {
+    setOpenModalEdit(false);
+    setEditEnable(true);
+    setHideBtn("none");
+  };
 
-  const deleteTicket = (idTicket) => {
-    window.location.replace(
+  const deleteTicket = async (idTicket) => {
+    const res = await axios.delete(
       "http://localhost:4242/api/deleteTickets/" + idTicket
     );
+
+    if (res) {
+      window.location.reload(false);
+    }
+    return "not done";
   };
 
   const handleOpenModalCreate = () => setCreateModal(true);
-  const handleCloseModalCreate = () => setCreateModal(false);
+  const handleCloseModalCreate = () => {
+    setCreateModal(false);
+    setEditEnable(true);
+    setHideBtn("none");
+  };
   const getDataEvent = async () => {
     console.log(urlEvents);
     const res = await axios.get(urlEvents);
@@ -106,12 +138,108 @@ export default function EventPageAdmin() {
       </div>
       <Modal open={openModalEdit} onClose={handleCloseModalEdit}>
         <Box className="modalStyle">
-          <Typography variant="h6" component="h2">
-            Titulo: {ticketItem.title}
-          </Typography>
-          <Typography sx={{ mt: 2 }}>Data: {ticketItem.date} </Typography>
+          <div className="titleLineModal">
+            <Typography variant="h6" component="h2">
+              Titulo: {ticketItem.title}
+            </Typography>
+            <IconButton color="primary" onClick={() => enableEdit()}>
+              <BorderColorIcon />
+            </IconButton>
+          </div>
+
+          <form
+            action={
+              "http://localhost:4242/api/updateTicket/" + ticketItem.idTicket
+            }
+            method="post"
+          >
+            <TextField
+              id="idEventID"
+              value={ticketItem.idEvent}
+              label={evento.title}
+              name="idEvent"
+              type="number"
+              fullWidth
+              readonly="true"
+              disabled={editEnable}
+            />
+            <TextField
+              id="titleID"
+              name="title"
+              // label="Nome do bilhete"
+              variant="outlined"
+              margin="dense"
+              fullWidth
+              disabled={editEnable}
+              defaultValue={ticketItem.title}
+            />
+            <div className="flex inputEvent">
+              <TextField
+                id="priceID"
+                name="price"
+                // label="Preço"
+                variant="outlined"
+                margin="dense"
+                fullWidth
+                type="number"
+                defaultValue={ticketItem.price}
+                disabled={editEnable}
+              />
+
+              <TextField
+                id="dispID"
+                name="availability"
+                label="Disponível"
+                variant="outlined"
+                margin="dense"
+                fullWidth
+                select
+                disabled={editEnable}
+                defaultValue={ticketItem.availability}
+              >
+                <MenuItem value={true}>Sim</MenuItem>
+                <MenuItem value={false}>Não</MenuItem>
+              </TextField>
+            </div>
+            <div className="flex inputEvent">
+              <TextField
+                id="dateID"
+                name="date"
+                type="date"
+                variant="outlined"
+                margin="dense"
+                fullWidth
+                defaultValue={ticketItem.date}
+                readonly="readonly"
+                disabled={editEnable}
+              />
+              <TextField
+                id="hourID"
+                name="hour"
+                type="time"
+                variant="outlined"
+                margin="dense"
+                fullWidth
+                defaultValue={ticketItem.hour}
+                disabled={editEnable}
+              />
+            </div>
+            <Typography align="right">
+              <Button
+                type="submit"
+                color="success"
+                variant="contained"
+                size="medium"
+                sx={{ mt: 2, display: hideBtn }}
+              >
+                Guardar
+              </Button>
+            </Typography>
+          </form>
         </Box>
       </Modal>
+
+      {/* Create Ticket MODAL */}
       <Modal open={createModal} onClose={handleCloseModalCreate}>
         <Box className="modalStyle">
           <Typography variant="h6" component="h2">
@@ -174,7 +302,12 @@ export default function EventPageAdmin() {
             </div>
 
             <Typography align="right">
-              <Button type="submit" variant="contained" size="medium">
+              <Button
+                type="submit"
+                variant="contained"
+                size="medium"
+                sx={{ mt: 2 }}
+              >
                 Criar
               </Button>
             </Typography>

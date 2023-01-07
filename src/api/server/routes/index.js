@@ -47,7 +47,7 @@ routes.get("/ticket/event/:idEvent", getTicketByEvent);
 routes.get("/ticketsByEventAdmin/:idEvent", getTicketByEvent);
 routes.delete("/deleteTickets/:idTicket", deleteTickets);
 routes.post("/createTicket", createTicket);
-routes.put("/updateTicket/:idTicket", updateTicket);
+routes.post("/updateTicket/:idTicket", updateTicket);
 
 routes.get("/events", getALLEvents);
 routes.get("/event/:idEvent", getEventByID);
