@@ -15,6 +15,15 @@ export const getUserid = async (req, res) => {
   res.send({ user });
 };
 
+export const getUserEmail = async (req, res) => {
+  const email = req.params.email;
+  const user = await UserModel.findAll(email);
+  if (user === null) {
+    res.send("Não existe User com email: " + email);
+  }
+  res.send({ user });
+};
+
 export const newUser = async (req, res) => {
   const newUser = {
     username: req.body.username,

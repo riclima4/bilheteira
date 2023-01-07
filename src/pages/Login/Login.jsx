@@ -1,8 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
 import "./login.css";
 
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 export default function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    // password: "",
+  });
+  const [apiItem, setApiItem] = useState(null);
+
+  async function fetchData() {
+    const response = await axios.get(
+      `http://localhost:4242/api/user/` + formData
+    );
+    setApiItem(response.data);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (apiItem) {
+      if (
+        formData.password === apiItem.password
+        // &&
+        // formData.email === apiItem.email
+      ) {
+        console.log("Form data matches API item");
+      } else {
+        console.log("Form data does not match API item");
+      }
+    }
+  }
+
   return (
     <div className="loginContent flex">
       <div className="loginLeft flex">
@@ -14,10 +45,25 @@ export default function Login() {
       </div>
       <div className="loginRight">
         <h1>Login</h1>
-        <form className="flex formLogin">
-          <input type="text" placeholder="Email address" />
-          <input type="password" placeholder="Password" />
-          <button>Entrar</button>
+        <form className="flex formLogin" onSubmit={handleSubmit}>
+          <input
+            name="email"
+            type="text"
+            placeholder="Email address"
+            value={formData.email}
+            onChange={(event) =>
+              setFormData({ ...formData, email: event.target.value })
+            }
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={(event) =>
+              setFormData({ ...formData, password: event.target.value })
+            }
+          />
+          <button type="submit">Entrar</button>
         </form>
         <p className="formDesc">
           Se ainda não tem conta clica <Link to="/register">aqui</Link>

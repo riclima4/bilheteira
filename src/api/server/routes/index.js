@@ -18,6 +18,7 @@ import {
 import {
   deleteUsers,
   getALLUsers,
+  getUserEmail,
   getUserid,
   login,
   newUser,
@@ -31,6 +32,7 @@ import {
   updateHistory,
 } from "../controllers/history.js";
 import { authRequired } from "../utils/jwt.js";
+import { RouteSharp } from "@mui/icons-material";
 
 const routes = Router();
 
@@ -38,6 +40,7 @@ routes.get("/", authRequired, getALLUsers);
 
 routes.get("/users", getALLUsers);
 routes.get("/user/:id", getUserid);
+routes.get("/user/:email", getUserEmail);
 routes.post("/newUser", newUser);
 routes.put("/updateUser/:id", updateUser);
 routes.delete("/deleteUser/:id", deleteUsers);

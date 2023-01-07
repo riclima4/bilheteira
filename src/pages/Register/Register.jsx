@@ -2,12 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
+import { Alert, Snackbar } from "@mui/material";
 
 export default function Register() {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [repeatPassword, setRepeatPassword] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,11 +29,13 @@ export default function Register() {
     };
     if (password !== repeatPassword) {
       console.log("Passwords dont match");
+      setOpen(true);
       return;
     }
 
     try {
       const res = await axios.post("http://localhost:4242/api/newUser", user);
+      setOpen(true);
     } catch (err) {
       console.log(err);
     }
@@ -61,8 +73,28 @@ export default function Register() {
             placeholder="Confirma Password"
             onChange={(e) => setRepeatPassword(e.target.value)}
           />
-
-          <button type="submit">Registar</button>
+          <button type="submit" onClick={handleSubmit}>
+            Registar
+          </button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="warning"
+              sx={{ width: "100%" }}
+            >
+              Passwords nao coincidem!
+            </Alert>
+          </Snackbar>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Conta Criada Com sucesso!
+            </Alert>
+          </Snackbar>
+          ;
         </form>
         <p className="formDesc">
           Se já tem conta entre <Link to="/login">aqui</Link>
