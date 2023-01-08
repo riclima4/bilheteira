@@ -27,6 +27,7 @@ export default function Register() {
       email,
       password,
     };
+
     if (password !== repeatPassword) {
       console.log("Passwords dont match");
       setOpen(true);
