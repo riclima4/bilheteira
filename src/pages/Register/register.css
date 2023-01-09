@@ -1,8 +1,8 @@
 .registerContent {
   font-family: "Public Sans", sans-serif;
   width: 100%;
-  height: 92.8vh;
-  padding-top: 6rem;
+  height: 80vh;
+
   background: linear-gradient(
     0deg,
     rgba(34, 164, 195, 1) 0%,
@@ -93,4 +93,13 @@
   .formRegister input {
     font-size: 17px;
   }
+}
+@media only screen and (max-width: 1800px) {
+  .registerContent {
+    height: 92.8vh;
+  }
+}
+.registerContent img {
+  width: 500px;
+  align-self: center;
 }

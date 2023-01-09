@@ -4,6 +4,9 @@ import "./login.css";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Button, TextField } from "@mui/material";
+import Footer from "../../components/Footer/Footer";
+import LogInImg from "../../assets/LoginImg.png";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -35,40 +38,45 @@ export default function Login() {
   }
 
   return (
-    <div className="loginContent flex">
-      <div className="loginLeft flex">
-        <h1>Bem-vindo de volta!</h1>
-        <img
-          src="https://minimal-kit-react.vercel.app/assets/illustrations/illustration_login.png"
-          alt=""
-        />
+    <>
+      <div className="loginContent flex">
+        <div className="loginLeft flex">
+          <h1>Bem-vindo de volta!</h1>
+          <img src={LogInImg} />
+        </div>
+        <div className="loginRight">
+          <h1>Login</h1>
+          <form className="flex formLogin" onSubmit={handleSubmit}>
+            <TextField
+              id="outlined-basic"
+              variant="filled"
+              type="text"
+              label="Email address"
+              value={formData.email}
+              onChange={(event) =>
+                setFormData({ ...formData, email: event.target.value })
+              }
+            />
+            <TextField
+              id="outlined-basic"
+              variant="filled"
+              type="password"
+              label="Password"
+              value={formData.password}
+              onChange={(event) =>
+                setFormData({ ...formData, password: event.target.value })
+              }
+            />
+            <Button variant="contained" type="submit">
+              Entrar
+            </Button>
+          </form>
+          <p className="formDesc">
+            Se ainda não tem conta clica <Link to="/register">aqui</Link>
+          </p>
+        </div>
       </div>
-      <div className="loginRight">
-        <h1>Login</h1>
-        <form className="flex formLogin" onSubmit={handleSubmit}>
-          <input
-            name="email"
-            type="text"
-            placeholder="Email address"
-            value={formData.email}
-            onChange={(event) =>
-              setFormData({ ...formData, email: event.target.value })
-            }
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={(event) =>
-              setFormData({ ...formData, password: event.target.value })
-            }
-          />
-          <button type="submit">Entrar</button>
-        </form>
-        <p className="formDesc">
-          Se ainda não tem conta clica <Link to="/register">aqui</Link>
-        </p>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 }

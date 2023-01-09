@@ -1,0 +1,32 @@
+.notFoundBackground {
+  font-family: "Public Sans", sans-serif;
+  width: 100%;
+  height: 80vh;
+
+  background: linear-gradient(
+    0deg,
+    rgba(34, 164, 195, 1) 0%,
+    rgba(169, 93, 255, 1) 73%
+  );
+}
+.NotFoundContent {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+  color: white;
+}
+
+@media only screen and (max-width: 1800px) {
+  .NotFoundContent {
+    height: 92.8vh;
+  }
+}
+
+.NotFoundContent img {
+  width: 450px;
+  align-self: center;
+}

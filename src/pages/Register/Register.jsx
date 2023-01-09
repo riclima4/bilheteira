@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Button, Snackbar, TextField } from "@mui/material";
+import Footer from "../../components/Footer/Footer";
+import SignupImg from "../../assets/SignupImg.png";
 
 export default function Register() {
   const [username, setUsername] = React.useState("");
@@ -15,7 +17,6 @@ export default function Register() {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
@@ -43,64 +44,72 @@ export default function Register() {
   };
 
   return (
-    <div className="registerContent flex">
-      <div className="registerLeft flex">
-        <h1>Bem-vindo de volta!</h1>
-        <img
-          src="https://minimal-kit-react.vercel.app/assets/illustrations/illustration_login.png"
-          alt=""
-        />
+    <>
+      <div className="registerContent flex">
+        <div className="registerLeft flex">
+          <h1>Bem-vindo</h1>
+          <h3>Cria já a tua conta na Purple Ticket</h3>
+          <img src={SignupImg} />
+        </div>
+        <div className="registerRight">
+          <h1>Registar</h1>
+          <form className="flex formRegister" onSubmit={handleSubmit}>
+            <TextField
+              id="outlined-basic"
+              variant="filled"
+              type="text"
+              label="Nome"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              variant="filled"
+              type="text"
+              label="Email address"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              variant="filled"
+              type="password"
+              label="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              variant="filled"
+              type="password"
+              label="Confirma Password"
+              onChange={(e) => setRepeatPassword(e.target.value)}
+            />
+            <Button variant="contained" type="submit" onClick={handleSubmit}>
+              Registar
+            </Button>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert
+                onClose={handleClose}
+                severity="warning"
+                sx={{ width: "100%" }}
+              >
+                Passwords nao coincidem!
+              </Alert>
+            </Snackbar>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                Conta Criada Com sucesso!
+              </Alert>
+            </Snackbar>
+          </form>
+          <p className="formDesc">
+            Se já tem conta entre <Link to="/login">aqui</Link>
+          </p>
+        </div>
       </div>
-      <div className="registerRight">
-        <h1>Registar</h1>
-        <form className="flex formRegister" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Nome"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Email address"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirma Password"
-            onChange={(e) => setRepeatPassword(e.target.value)}
-          />
-          <button type="submit" onClick={handleSubmit}>
-            Registar
-          </button>
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert
-              onClose={handleClose}
-              severity="warning"
-              sx={{ width: "100%" }}
-            >
-              Passwords nao coincidem!
-            </Alert>
-          </Snackbar>
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert
-              onClose={handleClose}
-              severity="success"
-              sx={{ width: "100%" }}
-            >
-              Conta Criada Com sucesso!
-            </Alert>
-          </Snackbar>
-          ;
-        </form>
-        <p className="formDesc">
-          Se já tem conta entre <Link to="/login">aqui</Link>
-        </p>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 }
