@@ -143,7 +143,6 @@ export default function Navbar(props) {
                   flexGrow: 1,
                 }}
               >
-                {userInfo?.idUser}
                 <Link to="/" className="logoTicket">
                   <i class="fa-solid fa-ticket"></i>
                 </Link>
@@ -152,13 +151,18 @@ export default function Navbar(props) {
                 sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
               ></Box>
               <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Ver Carrinho">
-                  <IconButton sx={{ p: 0, marginRight: 3, marginLeft: -3 }}>
-                    <Badge badgeContent={cart.length} color="info">
-                      <ShoppingCartIcon color="secondary" />
-                    </Badge>
-                  </IconButton>
-                </Tooltip>
+                {userInfo ? (
+                  <Tooltip title="Ver Carrinho">
+                    <IconButton sx={{ p: 0, marginRight: 3, marginLeft: -3 }}>
+                      <Badge badgeContent={cart.length} color="info">
+                        <ShoppingCartIcon color="secondary" />
+                      </Badge>
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  ""
+                )}
+
                 <Tooltip title="Abrir Definições">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
