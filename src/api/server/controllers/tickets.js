@@ -34,7 +34,7 @@ export const deleteTickets = async (req, res) => {
   const ticket = await TicketModule.findByPk(idTicket);
   if (ticket !== null) {
     ticket.destroy({ where: { idTicket: idTicket } });
-    return res.send("Tickets Apagado");
+    res.send("http://localhost:5500/ticketsByEventAdmin/" + ticket.idEvent);
   } else {
     return res.send("Não existe um Ticket com id:" + idTicket);
   }
@@ -42,6 +42,7 @@ export const deleteTickets = async (req, res) => {
 
 export const createTicket = async (req, res) => {
   const newTicket = {
+    idEvent: req.body.idEvent,
     title: req.body.title,
     date: req.body.date,
     hour: req.body.hour,
@@ -49,7 +50,9 @@ export const createTicket = async (req, res) => {
     availability: req.body.availability,
   };
   await TicketModule.create(newTicket);
-  res.send({ newTicket });
+  res.redirect(
+    "http://localhost:5500/ticketsByEventAdmin/" + newTicket.idEvent
+  );
 };
 
 export const updateTicket = async (req, res) => {
@@ -64,7 +67,7 @@ export const updateTicket = async (req, res) => {
   const ticket = await TicketModule.findByPk(idTicket);
   if (ticket !== null) {
     ticket.update(ticketUpdated);
-    return res.send("Ticket  Updated");
+    res.redirect("http://localhost:5500/ticketsByEventAdmin/" + ticket.idEvent);
   } else {
     return res.send("Não existe Ticket com id: " + idTicket);
   }

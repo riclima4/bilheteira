@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./eventPage.css";
-import { Button, IconButton } from "@mui/material";
+import { Alert, Button, IconButton, Snackbar, Typography } from "@mui/material";
 import Footer from "../../components/Footer/Footer";
 import { useParams } from "react-router-dom";
 import festivalImg from "../../assets/festivalEx.jpg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 
 export default function EventPage() {
@@ -13,10 +14,30 @@ export default function EventPage() {
   const [ticketCard, setTicketCard] = useState();
   const urlEvents = "http://localhost:4242/api/event/" + id;
   const urlTickets = "http://localhost:4242/api/ticket/event/" + id;
+  const urlAddToCart = "http://localhost:4242/api/newCart/" + id;
   // const urlTicketByID = "http://localhost:4242/api/tickets/" + ticketCard;
   const [evento, setEvento] = useState({});
   const [ticketByEvent, setTicketByEvent] = useState([]);
-  const [ticketByID, setTicketByID] = useState();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const handleCloseSnackBar = () => {
+    setSnackbarOpen(false);
+  };
+  const handleOpenSnackBar = () => {
+    setSnackbarOpen(true);
+  };
+  const addToCart = async (ticket) => {
+    const newItem = {
+      idTicket: ticket.idTicket,
+      idUser: 1,
+    };
+    const res = await axios.post(urlAddToCart, newItem).then(
+      handleOpenSnackBar(),
+      setTimeout(() => {
+        window.location.reload(false);
+      }, "1000")
+    );
+    if (!res) return;
+  };
 
   const getDataEvent = async () => {
     console.log(urlEvents);
@@ -46,6 +67,16 @@ export default function EventPage() {
 
   return (
     <div className="page-container">
+      <Snackbar
+        open={snackbarOpen}
+        onClose={handleCloseSnackBar}
+        autoHideDuration={2000}
+      >
+        <Alert severity="success" sx={{ width: "100%" }}>
+          Bilhete adicionado ao carrinho!
+        </Alert>
+      </Snackbar>
+      ;
       <div className="EventPageContent">
         <div className="EventoContent">
           <img src={festivalImg} alt="imagemEvento" />
@@ -77,26 +108,25 @@ export default function EventPage() {
           </div>
           {ticketCard ? (
             <div className="ticketInfo">
+              <Typography align="right">
+                <IconButton color="primary" onClick={() => setTicketCard()}>
+                  <CloseIcon />
+                </IconButton>
+              </Typography>
+
               <h3>{ticketCard.title}</h3>
               <p>{ticketCard.hour}h</p>
               <p>{ticketCard.price}€</p>
-              <Button variant="contained" endIcon={<ShoppingCartIcon />}>
-                Comprar
-              </Button>
-            </div>
-          ) : (
-            <div className="ticketInfo">
-              <h3>---------</h3>
-              <p>-------</p>
-              <p>----</p>
               <Button
                 variant="contained"
-                disabled
+                onClick={() => addToCart(ticketCard)}
                 endIcon={<ShoppingCartIcon />}
               >
                 Comprar
               </Button>
             </div>
+          ) : (
+            ""
           )}
         </div>
         <Footer />

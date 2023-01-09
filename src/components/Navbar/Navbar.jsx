@@ -1,4 +1,4 @@
-import React, { cloneElement, useState } from "react";
+import React, { cloneElement, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import AppBar from "@mui/material/AppBar";
@@ -13,7 +13,9 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import { CssBaseline } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge, CssBaseline } from "@mui/material";
+import axios from "axios";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -28,8 +30,11 @@ function ElevationScroll(props) {
 }
 
 export default function Navbar(props) {
+  const id = 1;
+  const cartUrl = "http://localhost:4242/api/userCart/" + id;
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [cart, setCart] = useState([]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -45,6 +50,15 @@ export default function Navbar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser();
   };
+  const getCartByUser = async () => {
+    const res = await axios.get(cartUrl);
+    if (!res) return;
+    console.log(res.data);
+    setCart(res.data);
+  };
+  useEffect(() => {
+    getCartByUser();
+  }, []);
   return (
     <>
       <CssBaseline />
@@ -128,6 +142,13 @@ export default function Navbar(props) {
                 sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
               ></Box>
               <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Ver Carrinho">
+                  <IconButton sx={{ p: 0, marginRight: 3, marginLeft: -3 }}>
+                    <Badge badgeContent={cart.length} color="info">
+                      <ShoppingCartIcon color="secondary" />
+                    </Badge>
+                  </IconButton>
+                </Tooltip>
                 <Tooltip title="Abrir Definições">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar

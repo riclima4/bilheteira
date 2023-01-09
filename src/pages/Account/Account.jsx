@@ -5,6 +5,7 @@ import History from "../../components/History/History";
 import "./account.css";
 
 export default function Account() {
+  const isLogged = true;
   return (
     <div className="page-container">
       <div className="AccountContent">
@@ -22,7 +23,7 @@ export default function Account() {
           </div>
         </div>
         <History />
-        <Admin />
+        {isLogged ? <Admin /> : ""}
       </div>
       <Footer />
     </div>
