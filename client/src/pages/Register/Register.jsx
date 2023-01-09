@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
 import { Alert, Button, Snackbar, TextField } from "@mui/material";
@@ -14,12 +14,14 @@ export default function Register() {
   const [openToast1, setOpenToast1] = React.useState(false);
   const [openToast2, setOpenToast2] = React.useState(false);
 
+  const navi = useNavigate();
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    openToast2(false);
-    openToast1(false);
+    setOpenToast2(false);
+    setOpenToast1(false);
   };
 
   const handleSubmit = async (e) => {
@@ -39,7 +41,10 @@ export default function Register() {
 
     try {
       const res = await axios.post("http://localhost:4242/api/newUser", user);
-      openToast1(true);
+      setOpenToast2(true);
+      setTimeout(() => {
+        navi("/login");
+      }, "2000");
     } catch (err) {
       console.log(err);
     }
@@ -89,8 +94,8 @@ export default function Register() {
             </Button>
 
             <Snackbar
-              open={openToast2}
-              autoHideDuration={6000}
+              open={openToast1}
+              autoHideDuration={2000}
               onClose={handleClose}
             >
               <Alert
@@ -103,8 +108,8 @@ export default function Register() {
             </Snackbar>
 
             <Snackbar
-              open={openToast1}
-              autoHideDuration={6000}
+              open={openToast2}
+              autoHideDuration={2000}
               onClose={handleClose}
             >
               <Alert
