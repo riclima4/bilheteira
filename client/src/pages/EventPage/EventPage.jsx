@@ -76,7 +76,7 @@ export default function EventPage() {
           Bilhete adicionado ao carrinho!
         </Alert>
       </Snackbar>
-      ;
+
       <div className="EventPageContent">
         <div className="EventoContent">
           <img src={festivalImg} alt="imagemEvento" />
