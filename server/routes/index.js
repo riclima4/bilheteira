@@ -32,7 +32,6 @@ import {
   updateHistory,
 } from "../controllers/history.js";
 import { authRequired } from "../utils/jwt.js";
-import { RouteSharp } from "@mui/icons-material";
 
 const routes = Router();
 

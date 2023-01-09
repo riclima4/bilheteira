@@ -1,4 +1,5 @@
-import React, { cloneElement, useState } from "react";
+import React, { cloneElement, useState, useEffect } from "react";
+import jwt from "jwt-decode";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import AppBar from "@mui/material/AppBar";
@@ -30,7 +31,15 @@ function ElevationScroll(props) {
 export default function Navbar(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
+  useEffect(() => {
+    const hasToken = localStorage.getItem("token");
+    if (hasToken) {
+      const info = jwt(hasToken);
+      setUserInfo(info);
+    }
+  }, []);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -120,6 +129,7 @@ export default function Navbar(props) {
                   flexGrow: 1,
                 }}
               >
+                {userInfo?.idUser}
                 <Link to="/" className="logoTicket">
                   <i class="fa-solid fa-ticket"></i>
                 </Link>

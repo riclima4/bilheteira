@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./login.css";
 
@@ -9,33 +9,35 @@ import Footer from "../../components/Footer/Footer";
 import LogInImg from "../../assets/LoginImg.png";
 
 export default function Login() {
+  const navi = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
-    // password: "",
   });
-  const [apiItem, setApiItem] = useState(null);
 
-  async function fetchData() {
-    const response = await axios.get(
-      `http://localhost:4242/api/user/` + formData
-    );
-    setApiItem(response.data);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (apiItem) {
-      if (
-        formData.password === apiItem.password
-        // &&
-        // formData.email === apiItem.email
-      ) {
-        console.log("Form data matches API item");
-      } else {
-        console.log("Form data does not match API item");
-      }
+  useEffect(() => {
+    const hasToken = localStorage.getItem("token");
+    if (hasToken) {
+      navi("/");
     }
-  }
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (
+      formData.password !== ""
+      // &&
+      // formData.email === apiItem.email
+    ) {
+      const { data } = await axios.post(
+        `http://localhost:4242/api/auth`,
+        formData
+      );
+      localStorage.setItem("token", data.token);
+      navi("/");
+    } else {
+      console.log("Form data does not match API item");
+    }
+  };
 
   return (
     <>
@@ -76,7 +78,7 @@ export default function Login() {
           </p>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

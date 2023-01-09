@@ -11,13 +11,15 @@ export default function Register() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [repeatPassword, setRepeatPassword] = React.useState("");
-  const [open, setOpen] = React.useState(false);
+  const [openToast1, setOpenToast1] = React.useState(false);
+  const [openToast2, setOpenToast2] = React.useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    openToast2(false);
+    openToast1(false);
   };
 
   const handleSubmit = async (e) => {
@@ -31,13 +33,13 @@ export default function Register() {
 
     if (password !== repeatPassword) {
       console.log("Passwords dont match");
-      setOpen(true);
+      setOpenToast1(true);
       return;
     }
 
     try {
       const res = await axios.post("http://localhost:4242/api/newUser", user);
-      setOpen(true);
+      openToast1(true);
     } catch (err) {
       console.log(err);
     }
@@ -64,7 +66,7 @@ export default function Register() {
             <TextField
               id="outlined-basic"
               variant="filled"
-              type="text"
+              type="email"
               label="Email address"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -85,7 +87,12 @@ export default function Register() {
             <Button variant="contained" type="submit" onClick={handleSubmit}>
               Registar
             </Button>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+
+            <Snackbar
+              open={openToast2}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
               <Alert
                 onClose={handleClose}
                 severity="warning"
@@ -94,7 +101,12 @@ export default function Register() {
                 Passwords nao coincidem!
               </Alert>
             </Snackbar>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+
+            <Snackbar
+              open={openToast1}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
               <Alert
                 onClose={handleClose}
                 severity="success"
@@ -109,7 +121,7 @@ export default function Register() {
           </p>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -30,9 +30,12 @@ export const newUser = async (req, res) => {
     password: req.body.password,
     email: req.body.email,
   };
-  await UserModel.create(newUser);
+  const asd = await UserModel.create(newUser);
+  const { password, ...user } = asd.dataValues;
 
-  res.send({ newUser });
+  const token = createToken(user);
+
+  res.send({ token, user });
 };
 
 export const updateUser = async (req, res) => {
@@ -89,21 +92,13 @@ export const deleteUsers = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const userWithEmail = await UserModel.findOne({ where: { email } }).catch(
-    (err) => {
-      console.log("Error", err);
-    }
-  );
+  const userWithEmail = await UserModel.findOne({ where: { email, password } });
 
   if (!userWithEmail)
     return res.status(400).json({ message: "Email or password errados" });
 
-  if (!userWithEmail.password !== password)
-    return res.status(400).json({ message: "Email or password errados" });
+  const { password: tfvgybhn, ...user } = userWithEmail.dataValues;
 
-  const jwToken = jwt.sign(
-    { id: userWithEmail.id, email: userWithEmail.email },
-    process.env.JWT_SECRET
-  );
-  res.json({ message: "Welcome", token: jwToken });
+  const token = createToken(user);
+  res.json({ token });
 };
