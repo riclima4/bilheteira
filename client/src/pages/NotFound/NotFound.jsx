@@ -10,7 +10,7 @@ export default function NotFound() {
         <div className="NotFoundContent">
           <h1>Oops! Pareces estar perdido</h1>
           <h3>Esta pagina não encontrada</h3>
-          <img src={NotFoundImg}></img>
+          <img src={NotFoundImg} alt="404 NotFound Image "></img>
           <Button
             to="/"
             variant="contained"

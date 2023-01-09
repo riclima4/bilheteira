@@ -44,7 +44,7 @@ export default function Login() {
       <div className="loginContent flex">
         <div className="loginLeft flex">
           <h1>Bem-vindo de volta!</h1>
-          <img src={LogInImg} />
+          <img src={LogInImg} alt="LogIn image" />
         </div>
         <div className="loginRight">
           <h1>Login</h1>
