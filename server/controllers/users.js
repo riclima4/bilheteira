@@ -65,30 +65,6 @@ export const deleteUsers = async (req, res) => {
   }
 };
 
-// export const login = async (req, res) => {
-//   const { username, password } = req.body;
-
-//   const user = await UserModel.findOne({
-//     where: {
-//       username: username,
-//       password: password,
-//     },
-//   });
-//   if (!user) {
-//     return res.status(500).json({
-//       message: "CREDENCIAIS ERRADAS",
-//     });
-//   }
-//   const token = createToken({
-//     id: user.id,
-//     username: user.username,
-//   });
-//   return res.send({
-//     message: "LOGIN FEITO",
-//     token,
-//   });
-// };
-
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
