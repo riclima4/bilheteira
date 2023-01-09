@@ -1,11 +1,10 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./login.css";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, TextField } from "@mui/material";
-import Footer from "../../components/Footer/Footer";
 import LogInImg from "../../assets/LoginImg.png";
 
 export default function Login() {
@@ -19,7 +18,7 @@ export default function Login() {
     if (hasToken) {
       navi("/");
     }
-  }, []);
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,7 +44,7 @@ export default function Login() {
       <div className="loginContent flex">
         <div className="loginLeft flex">
           <h1>Bem-vindo de volta!</h1>
-          <img src={LogInImg} />
+          <img src={LogInImg} alt="LogginImg" />
         </div>
         <div className="loginRight">
           <h1>Login</h1>

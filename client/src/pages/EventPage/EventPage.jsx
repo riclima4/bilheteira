@@ -63,7 +63,7 @@ export default function EventPage() {
   useEffect(() => {
     getDataEvent();
     getDataTicketByEvent();
-  }, []);
+  });
 
   return (
     <div className="page-container">

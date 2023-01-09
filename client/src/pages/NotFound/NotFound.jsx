@@ -11,7 +11,7 @@ export default function NotFound() {
         <div className="NotFoundContent">
           <h1>Oops! Pareces estar perdido</h1>
           <h3>Esta pagina não existe</h3>
-          <img src={NotFoundImg}></img>
+          <img src={NotFoundImg} alt="NotFoundImg"></img>
           <Button to="/" variant="contained" component={Link} color="secondary">
             Ir para página inicial
           </Button>

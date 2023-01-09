@@ -82,7 +82,7 @@ export default function EventPageAdmin() {
   useEffect(() => {
     getDataEvent();
     getDataTicketByEvent();
-  }, []);
+  });
 
   return (
     <div className="page-container">

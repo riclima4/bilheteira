@@ -21,18 +21,9 @@ import axios from "axios";
 export default function Navbar() {
   const [userInfo, setUserInfo] = useState(null);
   const [userID, setUserID] = useState();
-  useEffect(() => {
-    const hasToken = localStorage.getItem("token");
-    if (hasToken) {
-      const info = jwt(hasToken);
-      setUserInfo(info);
-      setUserID(info.idUser);
-    }
-  }, []);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [cart, setCart] = useState([]);
-
   const cartUrl = "http://localhost:4242/api/userCart";
   const navi = useNavigate();
 
@@ -60,12 +51,19 @@ export default function Navbar() {
   const getCartByUser = async () => {
     const res = await axios.get(`${cartUrl}/${userID}`);
     if (!res) return;
-    console.log(res.data);
     setCart(res.data);
+    console.log(cart);
   };
   useEffect(() => {
+    const hasToken = localStorage.getItem("token");
+    if (hasToken) {
+      const info = jwt(hasToken);
+      setUserInfo(info);
+      setUserID(info.idUser);
+      console.log(info.idUser);
+    }
     getCartByUser();
-  }, []);
+  }, [userID]);
   return (
     <>
       <AppBar position="sticky" sx={{ bgcolor: "#3B3B3B" }}>

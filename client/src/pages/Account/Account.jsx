@@ -1,29 +1,39 @@
-import React from "react";
+import jwt from "jwt-decode";
+import React, { useEffect, useState } from "react";
 import Admin from "../../components/Admin/Admin";
 import Footer from "../../components/Footer/Footer";
 import History from "../../components/History/History";
 import "./account.css";
 
 export default function Account() {
-  const isLogged = true;
+  const [userInfo, setUserInfo] = useState({});
+  const [userType, setUserType] = useState(1);
+  useEffect(() => {
+    const hasToken = localStorage.getItem("token");
+    if (hasToken) {
+      const info = jwt(hasToken);
+      setUserInfo(info);
+      setUserType(info.type);
+      console.log(info);
+    }
+  }, []);
   return (
     <div className="page-container">
       <div className="AccountContent">
         <h1 className="tituloText">Minha Conta</h1>
-        <div className="userInfoRow flex">
+        <div className="userInfoRow">
           <img
             className="userImgAccount"
             src="https://www.w3schools.com/w3css/img_avatar3.png"
             alt="userImg"
           />
           <div className="userInfo">
-            <h2>Nome: Ricardo Lima</h2>
-            <h2>Email: ric.lima1@hotmail.com</h2>
-            <h2>Contacto: 961746212</h2>
+            <h2>Nome: {userInfo.username}</h2>
+            <h2>Email: {userInfo.email}</h2>
           </div>
         </div>
         <History />
-        {isLogged ? <Admin /> : ""}
+        {userType === 100 ? <Admin /> : ""}
       </div>
       <Footer />
     </div>
