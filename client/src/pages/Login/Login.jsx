@@ -34,6 +34,7 @@ export default function Login() {
       );
       localStorage.setItem("token", data.token);
       navi("/");
+      window.location.reload(false);
     } else {
       console.log("Form data does not match API item");
     }
