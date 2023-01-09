@@ -13,6 +13,7 @@ import {
   createEvents,
   updateEvents,
   getEventByID,
+  getEventsAvailable,
 } from "../controllers/events.js";
 import {
   deleteUsers,
@@ -30,6 +31,11 @@ import {
   updateHistory,
 } from "../controllers/history.js";
 import { authRequired } from "../utils/jwt.js";
+import {
+  addNewCartItem,
+  getALLCart,
+  getALLCartbyUser,
+} from "../controllers/cart.js";
 
 const routes = Router();
 
@@ -50,16 +56,21 @@ routes.post("/createTicket", createTicket);
 routes.post("/updateTicket/:idTicket", updateTicket);
 
 routes.get("/events", getALLEvents);
+routes.get("/eventsAvailable", getEventsAvailable);
 routes.get("/event/:idEvent", getEventByID);
 routes.delete("/deleteEvents/:idEvent", deleteEvents);
 routes.post("/createEvent", createEvents);
-routes.put("/updateEvents/:idEvent", updateEvents);
+routes.post("/updateEvents/:idEvent", updateEvents);
 
 routes.get("/history", getALLHistory);
 routes.get("/history/:id", getHistoryid);
 routes.delete("/createHistory", newHistory);
-routes.post("/updaeHistory/:id", updateHistory);
+routes.post("/updateHistory/:id", updateHistory);
 routes.put("/deleteHistory/:id", deleteHistory);
+
+routes.get("/cart", getALLCart);
+routes.get("/userCart/:idUser", getALLCartbyUser);
+routes.post("/newCart/:idEvent", addNewCartItem);
 
 routes.post("/auth", login);
 export { routes };

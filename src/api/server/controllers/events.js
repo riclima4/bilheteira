@@ -5,6 +5,11 @@ export const getALLEvents = async (req, res) => {
 
   return res.send(events);
 };
+export const getEventsAvailable = async (req, res) => {
+  const events = await EventModule.findAll({ where: { availability: true } });
+
+  return res.send(events);
+};
 export const getEventByID = async (req, res) => {
   const idEvent = req.params.idEvent;
   const events = await EventModule.findByPk(idEvent);
@@ -27,12 +32,14 @@ export const createEvents = async (req, res) => {
   const newEvent = {
     title: req.body.title,
     local: req.body.local,
+    sessoes: req.body.sessoes,
     desc: req.body.desc,
     date: req.body.date,
     type: req.body.type,
+    availability: req.body.availability,
   };
   await EventModule.create(newEvent);
-  res.send({ newEvent });
+  res.redirect("http://localhost:5500/account/");
 };
 
 export const updateEvents = async (req, res) => {
@@ -40,14 +47,16 @@ export const updateEvents = async (req, res) => {
   const eventUpdated = {
     title: req.body.title,
     local: req.body.local,
+    sessoes: req.body.sessoes,
     desc: req.body.desc,
     date: req.body.date,
     type: req.body.type,
+    availability: req.body.availability,
   };
   const events = await EventModule.findByPk(idEvent);
   if (events !== null) {
     events.update(eventUpdated);
-    return res.send("Event Updated");
+    return res.redirect("http://localhost:5500/account/");
   } else {
     return res.send("Não existe Event com id: " + idEvent);
   }

@@ -6,7 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 
 export default function Dashboard() {
-  const urlEvents = "http://localhost:4242/api/events";
+  const urlEvents = "http://localhost:4242/api/eventsAvailable";
   const [eventos, setEventos] = useState([]);
 
   const getData = async () => {

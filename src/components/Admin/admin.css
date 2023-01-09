@@ -25,73 +25,32 @@
   padding-top: 10px;
   border-radius: 5px;
 }
-.tabela {
-  width: 80%;
-  margin: 0 auto;
-  height: 630px;
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.595);
-  border-radius: 8px;
-  padding: 10px;
-}
 table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
-}
-thead tr {
-  border-radius: 5px;
-}
-thead th {
-  background-color: rgba(136, 136, 136, 0.595);
 }
 th {
-  padding: 20px;
-  text-align: left;
-  text-transform: uppercase;
-}
-tbody tr {
-  cursor: pointer;
-}
-tbody tr:hover {
-  background-color: rgba(174, 174, 174, 0.595);
-}
-td {
-  padding: 20px;
-  border-bottom: 1px solid black;
-}
-th,
-td {
-  border-bottom: 1px solid rgba(142, 142, 142, 0.66);
-}
-th input,
-td input {
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-}
-td:first-child {
-  text-align: center;
-  width: 1rem;
-}
-td:nth-child(2) {
-  font-weight: bold;
-  text-transform: capitalize;
-}
-td:nth-child(4) {
-  max-width: 75px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   text-align: left;
 }
-td:nth-child(5) {
-  text-align: center;
+td {
+  border-bottom: 1px solid;
+  padding: 5px 0;
 }
-td:last-child {
-  width: 1rem;
-  text-align: center;
+
+th {
+  border-bottom: 1px solid;
 }
+.btnsEventRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+td:visited,
+td:link {
+  color: white;
+}
+
 .inputEvent {
   gap: 10px;
 }
@@ -112,6 +71,19 @@ td:last-child {
 a:link {
   text-decoration: none;
 }
+
+.eventosBackground {
+  background-color: rgba(255, 255, 255, 0.804);
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 3px;
+  padding: 15px 20px;
+}
+.btnLink:link,
+.btnLink:visited {
+  color: rgb(255, 255, 255);
+}
+
 @media only screen and (max-width: 900px) {
   .tabela {
     width: 90%;
