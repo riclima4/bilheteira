@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./dashboard.css";
 import Event from "../../components/Evento/Event";
 import { Grid } from "@mui/material";
@@ -7,6 +8,8 @@ import axios from "axios";
 
 export default function Dashboard() {
   const urlEvents = "http://localhost:4242/api/eventsAvailable";
+  const navi = useNavigate();
+
   const [eventos, setEventos] = useState([]);
 
   const getData = async () => {
@@ -14,6 +17,13 @@ export default function Dashboard() {
     if (!res) return;
     setEventos(res.data);
   };
+
+  useEffect(() => {
+    const hasToken = localStorage.getItem("token");
+    if (!hasToken) {
+      navi("/login");
+    }
+  }, []);
 
   useEffect(() => {
     getData();

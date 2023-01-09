@@ -15,15 +15,27 @@ export const getUserid = async (req, res) => {
   res.send({ user });
 };
 
+export const getUserEmail = async (req, res) => {
+  const email = req.params.email;
+  const user = await UserModel.findAll(email);
+  if (user === null) {
+    res.send("Não existe User com email: " + email);
+  }
+  res.send({ user });
+};
+
 export const newUser = async (req, res) => {
   const newUser = {
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
   };
-  await UserModel.create(newUser);
+  const asd = await UserModel.create(newUser);
+  const { password, ...user } = asd.dataValues;
 
-  res.send({ newUser });
+  const token = createToken(user);
+
+  res.send({ token, user });
 };
 
 export const updateUser = async (req, res) => {
@@ -53,28 +65,40 @@ export const deleteUsers = async (req, res) => {
   }
 };
 
+// export const login = async (req, res) => {
+//   const { username, password } = req.body;
+
+//   const user = await UserModel.findOne({
+//     where: {
+//       username: username,
+//       password: password,
+//     },
+//   });
+//   if (!user) {
+//     return res.status(500).json({
+//       message: "CREDENCIAIS ERRADAS",
+//     });
+//   }
+//   const token = createToken({
+//     id: user.id,
+//     username: user.username,
+//   });
+//   return res.send({
+//     message: "LOGIN FEITO",
+//     token,
+//   });
+// };
+
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  // if (!user || username.length <  4)
+  const userWithEmail = await UserModel.findOne({ where: { email, password } });
 
-  const user = await UserModel.findOne({
-    where: {
-      username: username,
-      password: password,
-    },
-  });
-  if (!user) {
-    return res.status(500).json({
-      message: "CREDENCIAIS ERRADAS",
-    });
-  }
-  const token = createToken({
-    id: user.id,
-    username: user.username,
-  });
-  return res.send({
-    message: "LOGIN FEITO",
-    token,
-  });
+  if (!userWithEmail)
+    return res.status(400).json({ message: "Email or password errados" });
+
+  const { password: tfvgybhn, ...user } = userWithEmail.dataValues;
+
+  const token = createToken(user);
+  res.json({ token });
 };

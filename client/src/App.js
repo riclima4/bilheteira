@@ -6,6 +6,7 @@ import Register from "./pages/Register/Register";
 import Account from "./pages/Account/Account";
 import EventPage from "./pages/EventPage/EventPage";
 import EventPageAdmin from "./pages/EventPageAdmin/EventPageAdmin";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
