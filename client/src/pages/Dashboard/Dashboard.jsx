@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
 import Event from "../../components/Evento/Event";
 import { Grid } from "@mui/material";
@@ -23,7 +23,7 @@ export default function Dashboard() {
     if (!hasToken) {
       navi("/login");
     }
-  }, []);
+  });
 
   useEffect(() => {
     getData();
@@ -51,6 +51,7 @@ export default function Dashboard() {
               if (evento.sessoes > 0) {
                 return <Event key={evento.idEvent} evento={evento} />;
               }
+              return "";
             })}
           </Grid>
         </div>

@@ -15,7 +15,7 @@ export const addNewCartItem = async (req, res) => {
   const idEvent = req.params.idEvent;
   const newCartItem = {
     idTicket: req.body.idTicket,
-    idUser: 1,
+    idUser: req.body.idUser,
   };
   await CartModule.create(newCartItem);
   res.redirect("http://localhost:5500/event/" + idEvent);

@@ -14,6 +14,7 @@ body {
     rgba(34, 164, 195, 1) 0%,
     rgba(169, 93, 255, 1) 73%
   );
+  padding: 10px;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

@@ -1,0 +1,57 @@
+.cartContent {
+  width: 85%;
+  height: 100%;
+
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 3px;
+}
+.linhaTituloAndDelete {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+.linhaTituloAndDelete h2 {
+  color: white;
+}
+.cart {
+  display: flex;
+  justify-content: space-between;
+}
+.linhas {
+  background-color: rgba(255, 255, 255, 0.66);
+  width: 65%;
+  border-radius: 3px;
+}
+.linhaCart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.linhaCartLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.linhaCartRight {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+.cartFull {
+  width: 35%;
+  color: white;
+  padding-top: 40px;
+  margin-inline: 20px;
+  border-left: 1px solid black;
+  text-align: center;
+}
+.cartFull p,
+.cartFull h4 {
+  margin-bottom: 30px;
+}

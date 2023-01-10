@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
 import { Alert, Button, Snackbar, TextField } from "@mui/material";
-import Footer from "../../components/Footer/Footer";
+
 import SignupImg from "../../assets/SignupImg.png";
 
 export default function Register() {
-  const [username, setUsername] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [repeatPassword, setRepeatPassword] = React.useState("");
-  const [openToast1, setOpenToast1] = React.useState(false);
-  const [openToast2, setOpenToast2] = React.useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [openToast1, setOpenToast1] = useState(false);
+  const [openToast2, setOpenToast2] = useState(false);
 
   const navi = useNavigate();
 
@@ -40,7 +40,7 @@ export default function Register() {
     }
 
     try {
-      const res = await axios.post("http://localhost:4242/api/newUser", user);
+      await axios.post("http://localhost:4242/api/newUser", user);
       setOpenToast2(true);
       setTimeout(() => {
         navi("/login");
@@ -56,7 +56,9 @@ export default function Register() {
         <div className="registerLeft flex">
           <h1>Bem-vindo</h1>
           <h3>Cria já a tua conta na Purple Ticket</h3>
-          <img src={SignupImg} alt="Signup Image" />
+
+          <img src={SignupImg} alt="SignUpImg" />
+
         </div>
         <div className="registerRight">
           <h1>Registar</h1>

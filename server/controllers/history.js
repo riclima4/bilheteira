@@ -3,15 +3,15 @@ import { HistoryModule } from "../models/history.js";
 export const getALLHistory = async (req, res) => {
   const History = await HistoryModule.findAll();
 
-  return res.send(events);
+  return res.send(History);
 };
-export const getHistoryid = async (req, res) => {
-  const idHistory = req.params.idHistory;
-  const user = await HistoryModule.findByPk(idHistory);
-  if (user === null) {
-    res.send("Não existe User com id: " + idHistory);
+export const getHistoryUserID = async (req, res) => {
+  const idUser = req.params.idUser;
+  const historico = await HistoryModule.findAll({ where: { idUser: idUser } });
+  if (historico === null) {
+    res.send("Não existe User com id: " + idUser);
   }
-  res.send({ user });
+  res.send(historico);
 };
 
 export const newHistory = async (req, res) => {

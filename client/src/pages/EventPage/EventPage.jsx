@@ -8,9 +8,12 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 export default function EventPage() {
   const { id } = useParams();
+  const [userInfo, setUserInfo] = useState(null);
+  const [userID, setUserID] = useState();
   const [ticketCard, setTicketCard] = useState();
   const urlEvents = "http://localhost:4242/api/event/" + id;
   const urlTickets = "http://localhost:4242/api/ticket/event/" + id;
@@ -28,7 +31,7 @@ export default function EventPage() {
   const addToCart = async (ticket) => {
     const newItem = {
       idTicket: ticket.idTicket,
-      idUser: 1,
+      idUser: userID,
     };
     const res = await axios.post(urlAddToCart, newItem).then(
       handleOpenSnackBar(),
@@ -61,8 +64,16 @@ export default function EventPage() {
   // };
 
   useEffect(() => {
+    const hasToken = localStorage.getItem("token");
+    if (hasToken) {
+      const info = jwtDecode(hasToken);
+      setUserInfo(info);
+      setUserID(info.idUser);
+      // console.log(info.idUser);
+    }
     getDataEvent();
     getDataTicketByEvent();
+    // eslint-disable-next-line
   }, []);
 
   return (
