@@ -16,6 +16,7 @@ import LogInImg from "../../assets/LoginImg.png";
 
 export default function Login() {
   const [openToast1, setOpenToast1] = useState(false);
+  const [openToast2, setOpenToast2] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -45,6 +46,7 @@ export default function Login() {
         formData
       );
       localStorage.setItem("token", data.token);
+      setOpenToast2(true);
       setTimeout(() => {
         navi("/");
       }, "2000");
@@ -107,6 +109,12 @@ export default function Login() {
       <Snackbar open={openToast1} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
           Credenciais Erradas!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={openToast2} autoHideDuration={2000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Login Realizado com sucesso!
         </Alert>
       </Snackbar>
     </>

@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
-import { Alert, Button, Snackbar, TextField } from "@mui/material";
-import Footer from "../../components/Footer/Footer";
+import {
+  Alert,
+  Button,
+  CircularProgress,
+  Snackbar,
+  TextField,
+  Backdrop,
+} from "@mui/material";
 import SignupImg from "../../assets/SignupImg.png";
 
 export default function Register() {
-  const [username, setUsername] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [repeatPassword, setRepeatPassword] = React.useState("");
-  const [openToast1, setOpenToast1] = React.useState(false);
-  const [openToast2, setOpenToast2] = React.useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [openToast1, setOpenToast1] = useState(false);
+  const [openToast2, setOpenToast2] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const navi = useNavigate();
 
@@ -45,6 +52,7 @@ export default function Register() {
       setTimeout(() => {
         navi("/login");
       }, "2000");
+      setOpen(true);
     } catch (err) {
       console.log(err);
     }
@@ -125,8 +133,14 @@ export default function Register() {
             Se já tem conta entre <Link to="/login">aqui</Link>
           </p>
         </div>
+
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
-      {/* <Footer /> */}
     </>
   );
 }
