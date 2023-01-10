@@ -13,7 +13,7 @@ export const getTicketid = async (req, res) => {
   if (tickets === null) {
     res.send("Não existe tickets com id: " + idTicket);
   }
-  res.send({ tickets });
+  res.send(tickets);
 };
 
 export const getTicketByEvent = async (req, res) => {

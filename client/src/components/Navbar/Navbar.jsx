@@ -148,9 +148,11 @@ export default function Navbar() {
                 <>
                   <Tooltip title="Ver Carrinho">
                     <IconButton sx={{ p: 0, marginRight: 3, marginLeft: -3 }}>
-                      <Badge badgeContent={cart.length} color="info">
-                        <ShoppingCartIcon color="secondary" />
-                      </Badge>
+                      <Link to={"/cart/" + userInfo.idUser}>
+                        <Badge badgeContent={cart.length} color="info">
+                          <ShoppingCartIcon color="secondary" />
+                        </Badge>
+                      </Link>
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Abrir Definições">

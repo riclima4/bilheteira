@@ -7,6 +7,7 @@ import Account from "./pages/Account/Account";
 import EventPage from "./pages/EventPage/EventPage";
 import EventPageAdmin from "./pages/EventPageAdmin/EventPageAdmin";
 import NotFound from "./pages/NotFound/NotFound";
+import CartPage from "./pages/CartPage/CartPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/event/:id" element={<EventPage />} />
           <Route path="/ticketsByEventAdmin/:id" element={<EventPageAdmin />} />
+          <Route path="/cart/:id" element={<CartPage />} />
         </Routes>
       </BrowserRouter>
     </>
