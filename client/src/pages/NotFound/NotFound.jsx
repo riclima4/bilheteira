@@ -9,8 +9,10 @@ export default function NotFound() {
       <div className="notFoundBackground">
         <div className="NotFoundContent">
           <h1>Oops! Pareces estar perdido</h1>
+
           <h3>Esta pagina não existe</h3>
           <img src={NotFoundImg} alt="NotFoundImg"></img>
+
           <Button
             to="/"
             variant="contained"

@@ -56,7 +56,9 @@ export default function Register() {
         <div className="registerLeft flex">
           <h1>Bem-vindo</h1>
           <h3>Cria já a tua conta na Purple Ticket</h3>
+
           <img src={SignupImg} alt="SignUpImg" />
+
         </div>
         <div className="registerRight">
           <h1>Registar</h1>
