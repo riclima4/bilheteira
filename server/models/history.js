@@ -47,6 +47,6 @@ const HistoryModule = dbInstance.define("history", {
   },
 });
 
-HistoryModule.belongsTo(TicketModule, { foreignKey: "idTicket" });
-HistoryModule.hasMany(UserModel, { foreignKey: "idUser" });
+TicketModule.hasMany(HistoryModule, { foreignKey: "idTicket" });
+HistoryModule.belongsTo(UserModel, { foreignKey: "idUser" });
 export { HistoryModule };
