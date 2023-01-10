@@ -63,7 +63,8 @@ export default function EventPage() {
   useEffect(() => {
     getDataEvent();
     getDataTicketByEvent();
-  });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="page-container">

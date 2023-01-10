@@ -28,7 +28,7 @@ import {
 import {
   deleteHistory,
   getALLHistory,
-  getHistoryid,
+  getHistoryUserID,
   newHistory,
   updateHistory,
 } from "../controllers/history.js";
@@ -68,7 +68,7 @@ routes.post("/createEvent", createEvents);
 routes.post("/updateEvents/:idEvent", updateEvents);
 
 routes.get("/history", getALLHistory);
-routes.get("/history/:idHistory", getHistoryid);
+routes.get("/history/:idUser", getHistoryUserID);
 routes.delete("/createHistory", newHistory);
 routes.post("/updateHistory/:id", updateHistory);
 routes.put("/deleteHistory/:id", deleteHistory);

@@ -48,7 +48,6 @@ export default function EventPageAdmin() {
     setEditEnable(true);
     setHideBtn("none");
   };
-
   const deleteTicket = async (idTicket) => {
     const res = await axios.delete(
       "http://localhost:4242/api/deleteTickets/" + idTicket
@@ -59,7 +58,6 @@ export default function EventPageAdmin() {
     }
     return "not done";
   };
-
   const handleOpenModalCreate = () => setCreateModal(true);
   const handleCloseModalCreate = () => {
     setCreateModal(false);

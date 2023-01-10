@@ -14,7 +14,7 @@ export default function Account() {
       const info = jwt(hasToken);
       setUserInfo(info);
       setUserType(info.type);
-      console.log(info);
+      // console.log(info);
     }
   }, []);
   return (

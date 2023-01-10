@@ -52,7 +52,6 @@ export default function Navbar() {
     const res = await axios.get(`${cartUrl}/${userID}`);
     if (!res) return;
     setCart(res.data);
-    console.log(cart);
   };
   useEffect(() => {
     const hasToken = localStorage.getItem("token");
@@ -60,7 +59,7 @@ export default function Navbar() {
       const info = jwt(hasToken);
       setUserInfo(info);
       setUserID(info.idUser);
-      console.log(info.idUser);
+      // console.log(info.idUser);
     }
     getCartByUser();
   }, [userID]);

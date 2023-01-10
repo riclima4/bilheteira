@@ -45,7 +45,7 @@ export default function Admin() {
   const getData = async () => {
     const res = await axios.get(urlEvents);
     if (!res) return;
-    console.log(res.data);
+    // console.log(res.data);
     setEventos(res.data);
   };
 

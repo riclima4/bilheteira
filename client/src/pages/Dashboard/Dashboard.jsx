@@ -47,10 +47,11 @@ export default function Dashboard() {
               justifyContent: "center",
             }}
           >
-            {eventos.forEach((evento) => {
+            {eventos.map((evento) => {
               if (evento.sessoes > 0) {
                 return <Event key={evento.idEvent} evento={evento} />;
               }
+              return "";
             })}
           </Grid>
         </div>
