@@ -20,6 +20,14 @@ const HistoryModule = dbInstance.define("history", {
       notEmpty: true,
     },
   },
+  ticketTitle: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  ticketDate: {
+    type: Sequelize.DATEONLY,
+    allowNull: false,
+  },
   idUser: {
     type: Sequelize.INTEGER,
     references: {

@@ -5,7 +5,8 @@
 }
 .userInfoRow {
   justify-content: space-evenly;
-  background-color: rgba(255, 255, 255, 0.595);
+  display: flex;
+  color: white;
   width: 60%;
   margin: 0 auto;
   margin-bottom: 3rem;

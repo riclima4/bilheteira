@@ -47,7 +47,7 @@ export default function Register() {
     }
 
     try {
-      const res = await axios.post("http://localhost:4242/api/newUser", user);
+      await axios.post("http://localhost:4242/api/newUser", user);
       setOpenToast2(true);
       setTimeout(() => {
         navi("/login");
@@ -64,7 +64,8 @@ export default function Register() {
         <div className="registerLeft flex">
           <h1>Bem-vindo</h1>
           <h3>Cria já a tua conta na Purple Ticket</h3>
-          <img src={SignupImg} alt="Signup Image" />
+
+          <img src={SignupImg} alt="SignUpImg" />
         </div>
         <div className="registerRight">
           <h1>Registar</h1>
