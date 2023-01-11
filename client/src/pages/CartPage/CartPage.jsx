@@ -57,16 +57,20 @@ export default function CartPage() {
     // console.log(res.data.idCart);
     setCartID(res.data.idCart);
   };
-  const handleBuy = () => {
+  const handleBuy = async () => {
     cart.forEach((item) => {
       axios.post(cartToHistory, item);
     });
-    setOpenToast1(true);
-    setTimeout(() => {
-      console.log(userID);
-      deleteAllCart(userID);
-    }, 2000);
-    setOpen(true);
+
+    console.log(userID);
+    const res = await axios.delete(cartUrlDeleteAll + userID);
+
+    if (res) {
+      setTimeout(() => {
+        setOpen(true);
+      }, 1000);
+      window.location.replace("http://localhost:5500/");
+    }
   };
   const deleteCart = async (idCart) => {
     const res = await axios.delete(cartUrlDelete + idCart);
