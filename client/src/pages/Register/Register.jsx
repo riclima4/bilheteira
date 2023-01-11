@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
-import { Alert, Button, Snackbar, TextField } from "@mui/material";
-
+import {
+  Alert,
+  Button,
+  CircularProgress,
+  Snackbar,
+  TextField,
+  Backdrop,
+} from "@mui/material";
 import SignupImg from "../../assets/SignupImg.png";
 
 export default function Register() {
@@ -13,6 +19,7 @@ export default function Register() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [openToast1, setOpenToast1] = useState(false);
   const [openToast2, setOpenToast2] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const navi = useNavigate();
 
@@ -45,6 +52,7 @@ export default function Register() {
       setTimeout(() => {
         navi("/login");
       }, "2000");
+      setOpen(true);
     } catch (err) {
       console.log(err);
     }
@@ -58,7 +66,6 @@ export default function Register() {
           <h3>Cria já a tua conta na Purple Ticket</h3>
 
           <img src={SignupImg} alt="SignUpImg" />
-
         </div>
         <div className="registerRight">
           <h1>Registar</h1>
@@ -127,8 +134,14 @@ export default function Register() {
             Se já tem conta entre <Link to="/login">aqui</Link>
           </p>
         </div>
+
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
-      {/* <Footer /> */}
     </>
   );
 }
