@@ -32,9 +32,9 @@ export default function History() {
       <div className="historico">
         {historico.map((item) => {
           return (
-            <>
+            <div key={item}>
               <Divider />
-              <div key={item} className="linha flex">
+              <div className="linha flex">
                 <div className="leftSideLinha flex">
                   <img className="linhaImg" src={festivalImg} alt="userImg" />
                   <div className="linhaInfo">
@@ -59,7 +59,7 @@ export default function History() {
                 </div>
               </div>
               <Divider />
-            </>
+            </div>
           );
         })}
       </div>
