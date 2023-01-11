@@ -66,10 +66,10 @@ export default function CartPage() {
     const res = await axios.delete(cartUrlDeleteAll + userID);
 
     if (res) {
+      setOpen(true);
       setTimeout(() => {
-        setOpen(true);
+        window.location.replace("http://localhost:5500/");
       }, 1000);
-      window.location.replace("http://localhost:5500/");
     }
   };
   const deleteCart = async (idCart) => {
