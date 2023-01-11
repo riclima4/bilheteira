@@ -39,6 +39,7 @@ import {
   deleteCartItem,
   getALLCart,
   getALLCartbyUser,
+  getOneCartbyUser,
 } from "../controllers/cart.js";
 
 const routes = Router();
@@ -71,12 +72,13 @@ routes.post("/updateEvents/:idEvent", updateEvents);
 
 routes.get("/history", getALLHistory);
 routes.get("/history/:idUser", getHistoryUserID);
-routes.delete("/createHistory", newHistory);
-routes.post("/updateHistory/:id", updateHistory);
-routes.put("/deleteHistory/:id", deleteHistory);
+routes.post("/createHistory", newHistory);
+routes.put("/updateHistory/:id", updateHistory);
+routes.delete("/deleteHistory/:id", deleteHistory);
 
 routes.get("/cart", getALLCart);
 routes.get("/userCart/:idUser", getALLCartbyUser);
+routes.get("/userCartOne/:idUser", getOneCartbyUser);
 routes.post("/newCart/:idEvent", addNewCartItem);
 routes.delete("/deleteCart/:idCart", deleteCartItem);
 routes.delete("/deleteAllCart/:idUser", deleteAllCart);

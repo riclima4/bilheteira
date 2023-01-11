@@ -39,7 +39,6 @@ export default function EventPageAdmin() {
       setHideBtn("none");
     }
   };
-
   const handleOpenModalEdit = (ticket) => {
     setOpenModalEdit(true);
     setTicketItem(ticket);

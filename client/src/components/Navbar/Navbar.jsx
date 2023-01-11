@@ -48,8 +48,8 @@ export default function Navbar() {
     }
   };
 
-  const getCartByUser = async () => {
-    const res = await axios.get(`${cartUrl}/${userID}`);
+  const getCartByUser = async (idUser) => {
+    const res = await axios.get(cartUrl + "/" + idUser);
     if (!res) return;
     setCart(res.data);
   };
@@ -59,10 +59,11 @@ export default function Navbar() {
       const info = jwt(hasToken);
       setUserInfo(info);
       setUserID(info.idUser);
+      getCartByUser(info.idUser);
       // console.log(info.idUser);
     }
-    getCartByUser();
   }, [userID]);
+
   return (
     <>
       <AppBar position="sticky" sx={{ bgcolor: "#3B3B3B" }}>

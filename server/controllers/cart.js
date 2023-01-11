@@ -11,6 +11,12 @@ export const getALLCartbyUser = async (req, res) => {
 
   return res.send(cart);
 };
+export const getOneCartbyUser = async (req, res) => {
+  const idUser = req.params.idUser;
+  const cart = await CartModule.findOne({ where: { idUser: idUser } });
+
+  return res.send(cart);
+};
 export const addNewCartItem = async (req, res) => {
   const idEvent = req.params.idEvent;
   const newCartItem = {

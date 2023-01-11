@@ -11,10 +11,14 @@ import axios from "axios";
 
 export default function CartPage() {
   const [userID, setUserID] = useState();
+  const [cartID, setCartID] = useState();
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState();
   const cartUrl = "http://localhost:4242/api/userCart";
-  const cartUrlDelete = "http://localhost:4242/api/userCart";
+  const cartUrlOne = "http://localhost:4242/api/userCartOne";
+  const cartUrlDelete = "http://localhost:4242/api/deleteCart/";
+  const cartUrlDeleteAll = "http://localhost:4242/api/deleteAllCart/";
+  const cartToHistory = "http://localhost:4242/api/createHistory/";
   const getCartByUser = async (idUser) => {
     const res = await axios.get(cartUrl + "/" + idUser);
     if (!res) return;
@@ -22,22 +26,33 @@ export default function CartPage() {
   };
   const getPrice = () => {
     const sum = cart.reduce((total, current) => total + current.ticketPrice, 0);
-    console.log(sum);
+
     setPrice(sum);
   };
+  const getCartID = async (idUser) => {
+    const res = await axios.get(cartUrlOne + "/" + idUser);
+    if (!res) return;
+    // console.log(res.data.idCart);
+    setCartID(res.data.idCart);
+  };
+  const handleBuy = () => {
+    cart.forEach((item) => {
+      axios.post(cartToHistory, item);
+    });
+    setTimeout(() => {
+      console.log(userID);
+      deleteAllCart(userID);
+    }, 2000);
+  };
   const deleteCart = async (idCart) => {
-    const res = await axios.delete(
-      "http://localhost:4242/api/deleteCart/" + idCart
-    );
+    const res = await axios.delete(cartUrlDelete + idCart);
     if (res) {
       window.location.reload(false);
     }
     return "not done";
   };
   const deleteAllCart = async (idUser) => {
-    const res = await axios.delete(
-      "http://localhost:4242/api/deleteAllCart/" + idUser
-    );
+    const res = await axios.delete(cartUrlDeleteAll + idUser);
 
     if (res) {
       window.location.replace("http://localhost:5500/");
@@ -51,6 +66,7 @@ export default function CartPage() {
       const info = jwtDecode(hasToken);
       setUserID(info.idUser);
       getCartByUser(info.idUser);
+      getCartID(info.idUser);
       //
     }
 
@@ -107,7 +123,11 @@ export default function CartPage() {
                 COMPRAR
               </Button>
             ) : (
-              <Button variant="contained" color="success">
+              <Button
+                onClick={() => handleBuy()}
+                variant="contained"
+                color="success"
+              >
                 COMPRAR
               </Button>
             )}

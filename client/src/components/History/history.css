@@ -8,15 +8,25 @@
 }
 
 .linha {
-  gap: 3rem;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  border-bottom: 1px solid gray;
+  flex-wrap: wrap;
+}
+
+.linhaInfo {
+  display: flex;
+  width: 100%;
+}
+.secondCol,
+.firstCol {
+  width: 100%;
+  border-left: 1px solid gray;
+  padding: 10px;
 }
 .leftSideLinha {
+  width: 79%;
   gap: 3rem;
   align-items: center;
-  margin-left: 3rem;
 }
 .linhaImg {
   border-radius: 50%;
@@ -28,7 +38,10 @@
 .rightSideLinha {
   gap: 1rem;
   align-items: center;
-  margin-right: 3rem;
+  width: 20%;
+  justify-content: center;
+  border-left: 1px solid gray;
+  height: 10rem;
 }
 .seeMoreBtn {
   color: rgb(13, 151, 0);
@@ -67,8 +80,18 @@
 @media only screen and (max-width: 650px) {
   .leftSideLinha {
     flex-direction: column;
-    gap: 2px;
+    gap: 20px;
     padding: 5px;
     margin: 0 auto;
+  }
+  .rightSideLinha {
+    border: none;
+  }
+  .secondCol,
+  .firstCol {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 10px;
   }
 }

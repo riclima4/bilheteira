@@ -28,7 +28,10 @@ const HistoryModule = dbInstance.define("history", {
     type: Sequelize.DATEONLY,
     allowNull: false,
   },
-
+  eventTitle: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   idUser: {
     type: Sequelize.INTEGER,
     references: {
@@ -43,16 +46,12 @@ const HistoryModule = dbInstance.define("history", {
   date: {
     type: Sequelize.DATEONLY,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    defaultValue: Sequelize.NOW,
   },
   hour: {
     type: Sequelize.TIME,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    defaultValue: Sequelize.NOW,
   },
 });
 
