@@ -25,11 +25,22 @@ export default function Admin() {
   };
   const [editEnable, setEditEnable] = useState(true);
   const [hideBtn, setHideBtn] = useState("none");
-  const [open, setOpen] = useState(false);
+  const [openEvent, setOpenEvent] = useState(false);
+  const [openUser, setOpenUser] = useState(false);
   const [openModal, setOpenModalEvent] = useState(false);
+
+  const [openModal2, setOpenModalUser] = useState(false);
+
   const [eventSelect, setEventSelect] = useState({});
-  const handleOpenCreateEvent = () => setOpen(true);
-  const handleCloseCreateEvent = () => setOpen(false);
+
+  const [userSelect, setUserSelect] = useState({});
+
+  const handleOpenCreateEvent = () => setOpenEvent(true);
+  const handleCloseCreateEvent = () => setOpenEvent(false);
+
+  const handleOpenCreateUser = () => setOpenUser(true);
+  const handleCloseCreateUser = () => setOpenUser(false);
+
   const handleOpenModalEvent = (evento) => {
     setEventSelect(evento);
     setOpenModalEvent(true);
@@ -39,14 +50,40 @@ export default function Admin() {
     setEditEnable(true);
     setHideBtn("none");
   };
+
+  const handleOpenModalUser = (user) => {
+    setUserSelect(user);
+    setOpenModalUser(true);
+  };
+  const handleCloseModalUser = () => {
+    setOpenModalUser(false);
+    setEditEnable(true);
+    setHideBtn("none");
+  };
+
   const urlEvents = "http://localhost:4242/api/events";
   const [eventos, setEventos] = useState([]);
 
+  const urlUsers = "http://localhost:4242/api/users";
+  const [users, setUsers] = useState([]);
+
+  const urlDeleteUser = "http://localhost:4242/api/deleteUser/";
+
+  const deleteUser = async (userId) => {
+    const res = await axios.delete(urlDeleteUser + userId);
+    if (res) {
+      window.location.reload(false);
+    }
+    return;
+  };
+
   const getData = async () => {
     const res = await axios.get(urlEvents);
+    const response = await axios.get(urlUsers);
     if (!res) return;
-    // console.log(res.data);
+    console.log(response.data);
     setEventos(res.data);
+    setUsers(response.data);
   };
 
   useEffect(() => {
@@ -108,9 +145,60 @@ export default function Admin() {
         </table>
       </div>
 
+      <div className="flex tituloSection tituloAndBtn">
+        <h1>Users</h1>
+        <button onClick={handleOpenCreateUser} className="addBilhetesBtn">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+
+      <div className="eventosBackground">
+        <table>
+          <thead>
+            <tr>
+              <th>Utilizador</th>
+              <th>Email</th>
+              <th>tipo</th>
+              <th>Atualizar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => {
+              return (
+                <tr key={user.idUser}>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.type === 100 ? "Admin" : "Cliente"}</td>
+                  <td className="btnsEventRow">
+                    <Button
+                      fullWidth
+                      component={Link}
+                      onClick={() => deleteUser(user.idUser)}
+                      variant="contained"
+                      color="error"
+                      className="btnLink"
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      onClick={() => handleOpenModalUser(user)}
+                      color="primary"
+                    >
+                      Atualizar
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
       {/* Criar Evento MODAL */}
       <Modal
-        open={open}
+        open={openEvent}
         onClose={handleCloseCreateEvent}
         aria-labelledby="modal-modal-title"
       >
@@ -333,6 +421,146 @@ export default function Admin() {
               </TextField>
             </div>
 
+            <Typography align="right">
+              <Button
+                type="submit"
+                color="success"
+                variant="contained"
+                size="medium"
+                sx={{ mt: 2, display: hideBtn }}
+              >
+                Guardar
+              </Button>
+            </Typography>
+          </form>
+        </Box>
+      </Modal>
+      {/* Criar User MODAL */}
+      <Modal
+        open={openUser}
+        onClose={handleCloseCreateUser}
+        aria-labelledby="modal-modal-title"
+      >
+        <Box className="modalStyle">
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            <div className="flex tituloInputEvent">
+              <div>Criação de User</div>
+              <IconButton onClick={handleCloseCreateUser} aria-label="delete">
+                <CloseIcon />
+              </IconButton>
+            </div>
+          </Typography>
+          <form method="post" action="http://localhost:4242/api/newUser">
+            <TextField
+              id="outlined-basic"
+              name="username"
+              label="Nome de utilizador"
+              variant="outlined"
+              margin="dense"
+              fullWidth
+              required
+            />
+            <TextField
+              id="outlined-basic"
+              name="password"
+              label="Password do utilizador"
+              variant="outlined"
+              margin="dense"
+              fullWidth
+              required
+            />
+            <div className="flex inputEvent">
+              <TextField
+                id="outlined-basic"
+                name="email"
+                label="Email do utilizador"
+                variant="outlined"
+                margin="dense"
+                fullWidth
+                required
+              />
+
+              <TextField
+                id="outlined-basic-disp"
+                name="type"
+                label="Tipo de Utilizador"
+                variant="outlined"
+                margin="dense"
+                fullWidth
+                select
+                defaultValue={1}
+              >
+                <MenuItem value={1}>Cliente</MenuItem>
+                <MenuItem value={100}>Admin</MenuItem>
+              </TextField>
+            </div>
+            <Typography align="right">
+              <Button type="submit" variant="contained" size="medium">
+                Criar
+              </Button>
+            </Typography>
+          </form>
+        </Box>
+      </Modal>
+      {/* Editar User */}
+      <Modal open={openModal2} onClose={handleCloseModalUser}>
+        <Box className="modalStyle">
+          <div className="titleLineModal">
+            <Typography variant="h6" component="h2">
+              User: {userSelect.idUser}
+            </Typography>
+            <IconButton color="primary" onClick={() => enableEdit()}>
+              <BorderColorIcon />
+            </IconButton>
+          </div>
+          <form
+            action={"http://localhost:4242/api/updateUser/" + userSelect.idUser}
+            method="post"
+          >
+            <TextField
+              value={userSelect.idUser}
+              disabled={editEnable}
+              label="ID do User"
+              name="idUser"
+              fullWidth
+            />
+            <TextField
+              name="username"
+              label="Nome do Utilisador"
+              variant="outlined"
+              margin="dense"
+              defaultValue={userSelect.username}
+              disabled={editEnable}
+              fullWidth
+              required
+            />
+            <TextField
+              name="email"
+              label="Email do Utilisador"
+              variant="outlined"
+              margin="dense"
+              disabled={editEnable}
+              fullWidth
+              defaultValue={userSelect.email}
+              required
+            />
+            <div className="flex inputEvent">
+              <TextField
+                id="type"
+                name="type"
+                label="Tipo"
+                variant="outlined"
+                margin="dense"
+                fullWidth
+                disabled={editEnable}
+                select
+                defaultValue={userSelect.type}
+                required
+              >
+                <MenuItem value={1}>Cliente</MenuItem>
+                <MenuItem value={100}>Admin</MenuItem>
+              </TextField>
+            </div>
             <Typography align="right">
               <Button
                 type="submit"
