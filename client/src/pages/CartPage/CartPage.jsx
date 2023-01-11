@@ -75,9 +75,10 @@ export default function CartPage() {
   const deleteCart = async (idCart) => {
     const res = await axios.delete(cartUrlDelete + idCart);
     if (res) {
-      window.location.reload(false);
       setOpenToast1(true);
-      setTimeout(() => {}, 2000);
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 2000);
       setOpen(true);
     }
     return "not done";
@@ -86,7 +87,10 @@ export default function CartPage() {
     const res = await axios.delete(cartUrlDeleteAll + idUser);
 
     if (res) {
-      window.location.replace("http://localhost:5500/");
+      setTimeout(() => {
+        window.location.replace("http://localhost:5500/");
+      }, 2000);
+      setOpen(true);
       setOpenToast1(true);
     }
     return "not done";
