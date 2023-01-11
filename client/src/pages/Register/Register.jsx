@@ -43,19 +43,15 @@ export default function Register() {
     if (password !== repeatPassword) {
       console.log("Passwords dont match");
       setOpenToast1(true);
+      console.log(user);
       return;
     }
-
-    try {
-      await axios.post("http://localhost:4242/api/newUser", user);
-      setOpenToast2(true);
-      setTimeout(() => {
-        navi("/login");
-      }, "2000");
-      setOpen(true);
-    } catch (err) {
-      console.log(err);
-    }
+    await axios.post("http://localhost:4242/api/newUser", user);
+    setOpenToast2(true);
+    setTimeout(() => {
+      navi("/login");
+    }, "2000");
+    setOpen(true);
   };
 
   return (

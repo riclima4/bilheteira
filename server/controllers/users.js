@@ -35,7 +35,7 @@ export const newUser = async (req, res) => {
 
   const token = createToken(user);
 
-  res.redirect("http://localhost:5500/account/");
+  res.send(token);
 };
 
 export const updateUser = async (req, res) => {
