@@ -8,8 +8,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { Button, Divider } from "@mui/material";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
+  const navi = useNavigate();
   const [userID, setUserID] = useState();
   const [cartID, setCartID] = useState();
   const [cart, setCart] = useState([]);
@@ -68,6 +70,8 @@ export default function CartPage() {
       getCartByUser(info.idUser);
       getCartID(info.idUser);
       //
+    } else {
+      navi("/login");
     }
 
     // eslint-disable-next-line

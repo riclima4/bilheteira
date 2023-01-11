@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./eventPage.css";
 import { Alert, Button, IconButton, Snackbar, Typography } from "@mui/material";
 import Footer from "../../components/Footer/Footer";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import festivalImg from "../../assets/festivalEx.jpg";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -22,6 +22,7 @@ export default function EventPage() {
   const [evento, setEvento] = useState({});
   const [ticketByEvent, setTicketByEvent] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const navi = useNavigate();
   const handleCloseSnackBar = () => {
     setSnackbarOpen(false);
   };
@@ -74,6 +75,8 @@ export default function EventPage() {
       setUserInfo(info);
       setUserID(info.idUser);
       // console.log(info.idUser);
+    } else {
+      navi("/login");
     }
     getDataEvent();
     getDataTicketByEvent();

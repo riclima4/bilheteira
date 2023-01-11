@@ -1,5 +1,6 @@
 import jwt from "jwt-decode";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Admin from "../../components/Admin/Admin";
 import Footer from "../../components/Footer/Footer";
 import History from "../../components/History/History";
@@ -8,6 +9,7 @@ import "./account.css";
 export default function Account() {
   const [userInfo, setUserInfo] = useState({});
   const [userType, setUserType] = useState(1);
+  const navi = useNavigate();
   useEffect(() => {
     const hasToken = localStorage.getItem("token");
     if (hasToken) {
@@ -15,6 +17,8 @@ export default function Account() {
       setUserInfo(info);
       setUserType(info.type);
       // console.log(info);
+    } else {
+      navi("/login");
     }
   }, []);
   return (

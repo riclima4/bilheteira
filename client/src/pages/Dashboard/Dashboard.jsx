@@ -23,7 +23,7 @@ export default function Dashboard() {
     if (!hasToken) {
       navi("/login");
     }
-  });
+  }, []);
 
   useEffect(() => {
     getData();
