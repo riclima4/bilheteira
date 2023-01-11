@@ -37,6 +37,7 @@
   border: 1px solid rgba(105, 193, 255, 0.395);
   margin-bottom: 10px;
   font-size: 20px;
+  background-color: white;
 }
 .formRegister input:focus {
   outline: none;

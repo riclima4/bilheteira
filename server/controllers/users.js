@@ -3,7 +3,7 @@ import { UserModel } from "../models/users.js";
 
 export const getALLUsers = async (req, res) => {
   const users = await UserModel.findAll();
-  return res.send({ users });
+  return res.send(users);
 };
 
 export const getUserid = async (req, res) => {
@@ -35,7 +35,7 @@ export const newUser = async (req, res) => {
 
   const token = createToken(user);
 
-  res.send({ token, user });
+  res.redirect("http://localhost:5500/account/");
 };
 
 export const updateUser = async (req, res) => {
@@ -44,11 +44,12 @@ export const updateUser = async (req, res) => {
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
+    type: req.body.type,
   };
   const user = await UserModel.findByPk(id);
   if (user !== null) {
     user.update(userUpdated);
-    return res.send("User  Updated");
+    return res.redirect("http://localhost:5500/account/");
   } else {
     return res.send("Não existe User com id: " + id);
   }
