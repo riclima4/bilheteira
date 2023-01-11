@@ -57,25 +57,32 @@ export default function CartPage() {
     // console.log(res.data.idCart);
     setCartID(res.data.idCart);
   };
-  const handleBuy = () => {
+  const handleBuy = async () => {
     cart.forEach((item) => {
       axios.post(cartToHistory, item);
     });
-    setOpenToast1(true);
-    setTimeout(() => {
-      console.log(userID);
-      deleteAllCart(userID);
-    }, 2000);
-    setOpen(true);
+
+    console.log(userID);
+    const res = await axios.delete(cartUrlDeleteAll + userID);
+
+    if (res) {
+      setOpen(true);
+      setTimeout(() => {
+        window.location.replace("http://localhost:5500/");
+      }, 1000);
+    }
   };
   const deleteCart = async (idCart) => {
     const res = await axios.delete(cartUrlDelete + idCart);
     if (res) {
-      setOpenToast1(true);
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+        setOpenToast1(true);
+      }, 2000);
       setTimeout(() => {
         window.location.reload(false);
-      }, 2000);
-      setOpen(true);
+      }, 2500);
     }
     return "not done";
   };
@@ -174,13 +181,13 @@ export default function CartPage() {
           </div>
         </div>
       </div>
-      <Snackbar open={openToast1} autoHideDuration={2000} onClose={handleClose}>
+      <Snackbar open={openToast1} autoHideDuration={1000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           Bilhete Removido com Sucesso!
         </Alert>
       </Snackbar>
 
-      <Snackbar open={openToast2} autoHideDuration={2000} onClose={handleClose}>
+      <Snackbar open={openToast2} autoHideDuration={1000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Compra efetuada com Sucesso!
         </Alert>
