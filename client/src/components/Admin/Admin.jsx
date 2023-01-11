@@ -8,13 +8,31 @@ import {
   Modal,
   TextField,
   Typography,
+  Snackbar,
+  Alert,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import jwtDecode from "jwt-decode";
 
 export default function Admin() {
+  const [userID, setUserID] = useState();
+  const navi = useNavigate();
+  useEffect(() => {
+    const hasToken = localStorage.getItem("token");
+    if (hasToken) {
+      const info = jwtDecode(hasToken);
+      setUserID(info.idUser);
+
+      // console.log(info);
+    } else {
+      navi("/login");
+    }
+  }, [navi]);
   const enableEdit = () => {
     setEditEnable(!editEnable);
     if (editEnable) {
@@ -52,8 +70,12 @@ export default function Admin() {
   };
 
   const handleOpenModalUser = (user) => {
-    setUserSelect(user);
-    setOpenModalUser(true);
+    if (userID !== user.idUser) {
+      setUserSelect(user);
+      setOpenModalUser(true);
+    } else {
+      setOpenToast1(true);
+    }
   };
   const handleCloseModalUser = () => {
     setOpenModalUser(false);
@@ -68,20 +90,34 @@ export default function Admin() {
   const [users, setUsers] = useState([]);
 
   const urlDeleteUser = "http://localhost:4242/api/deleteUser/";
+  const [openToast1, setOpenToast1] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenToast1(false);
+  };
 
   const deleteUser = async (userId) => {
-    const res = await axios.delete(urlDeleteUser + userId);
-    if (res) {
-      window.location.reload(false);
+    if (userID !== userId) {
+      setOpen(true);
+      const res = await axios.delete(urlDeleteUser + userId);
+      if (res) {
+        window.location.reload(false);
+      }
+      return;
+    } else {
+      setOpenToast1(true);
     }
-    return;
   };
 
   const getData = async () => {
     const res = await axios.get(urlEvents);
     const response = await axios.get(urlUsers);
     if (!res) return;
-    console.log(response.data);
+    // console.log(response.data);
     setEventos(res.data);
     setUsers(response.data);
   };
@@ -195,7 +231,17 @@ export default function Admin() {
           </tbody>
         </table>
       </div>
-
+      <Snackbar open={openToast1} autoHideDuration={2000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Não podes apagar ou editar este Utilizador!
+        </Alert>
+      </Snackbar>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       {/* Criar Evento MODAL */}
       <Modal
         open={openEvent}
@@ -450,7 +496,7 @@ export default function Admin() {
               </IconButton>
             </div>
           </Typography>
-          <form method="post" action="http://localhost:4242/api/newUser">
+          <form method="post" action="http://localhost:4242/api/newUserPage">
             <TextField
               id="outlined-basic"
               name="username"

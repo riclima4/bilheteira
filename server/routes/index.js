@@ -23,6 +23,7 @@ import {
   getUserid,
   login,
   newUser,
+  newUserPage,
   updateUser,
 } from "../controllers/users.js";
 import {
@@ -50,6 +51,7 @@ routes.get("/users", getALLUsers);
 routes.get("/user/:id", getUserid);
 routes.get("/user/:email", getUserEmail);
 routes.post("/newUser", newUser);
+routes.post("/newUserPage", newUserPage);
 routes.post("/updateUser/:id", updateUser);
 routes.delete("/deleteUser/:id", deleteUsers);
 
@@ -74,7 +76,7 @@ routes.get("/history", getALLHistory);
 routes.get("/history/:idUser", getHistoryUserID);
 routes.post("/createHistory", newHistory);
 routes.put("/updateHistory/:id", updateHistory);
-routes.delete("/deleteHistory/:id", deleteHistory);
+routes.delete("/deleteHistory/:idHistory", deleteHistory);
 
 routes.get("/cart", getALLCart);
 routes.get("/userCart/:idUser", getALLCartbyUser);

@@ -20,7 +20,6 @@ import { useNavigate } from "react-router-dom";
 export default function CartPage() {
   const navi = useNavigate();
   const [userID, setUserID] = useState();
-  const [cartID, setCartID] = useState();
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState();
   const cartUrl = "http://localhost:4242/api/userCart";
@@ -51,12 +50,7 @@ export default function CartPage() {
 
     setPrice(sum);
   };
-  const getCartID = async (idUser) => {
-    const res = await axios.get(cartUrlOne + "/" + idUser);
-    if (!res) return;
-    // console.log(res.data.idCart);
-    setCartID(res.data.idCart);
-  };
+
   const handleBuy = async () => {
     cart.forEach((item) => {
       axios.post(cartToHistory, item);
@@ -68,8 +62,12 @@ export default function CartPage() {
     if (res) {
       setOpen(true);
       setTimeout(() => {
+        setOpenToast2(true);
+      }, 2000);
+
+      setTimeout(() => {
         window.location.replace("http://localhost:5500/");
-      }, 1000);
+      }, 2800);
     }
   };
   const deleteCart = async (idCart) => {
@@ -77,12 +75,11 @@ export default function CartPage() {
     if (res) {
       setOpen(true);
       setTimeout(() => {
-        setOpen(false);
         setOpenToast1(true);
       }, 2000);
       setTimeout(() => {
         window.location.reload(false);
-      }, 2500);
+      }, 2800);
     }
     return "not done";
   };
@@ -105,7 +102,7 @@ export default function CartPage() {
       const info = jwtDecode(hasToken);
       setUserID(info.idUser);
       getCartByUser(info.idUser);
-      getCartID(info.idUser);
+
       //
     } else {
       navi("/login");
