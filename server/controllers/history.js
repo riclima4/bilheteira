@@ -18,8 +18,9 @@ export const newHistory = async (req, res) => {
   const newHistory = {
     idTicket: req.body.idTicket,
     idUser: req.body.idUser,
-    data: req.body.data,
-    hour: req.body.hour,
+    eventTitle: req.body.eventTitle,
+    ticketTitle: req.body.ticketTitle,
+    ticketDate: req.body.ticketDate,
   };
   await HistoryModule.create(newHistory);
 
@@ -28,7 +29,7 @@ export const newHistory = async (req, res) => {
 
 export const updateHistory = async (req, res) => {
   const idHistory = req.params.idHistory;
-  const userUpdated = {
+  const historyUpdated = {
     idTicket: req.body.idTicket,
     idUser: req.body.idUser,
     data: req.body.data,
@@ -36,7 +37,7 @@ export const updateHistory = async (req, res) => {
   };
   const history = await HistoryModule.findByPk(idHistory);
   if (history !== null) {
-    history.update(historyrUpdated);
+    history.update(historyUpdated);
     return res.send("history Updated");
   } else {
     return res.send("Não existe history com id: " + idHistory);

@@ -24,7 +24,7 @@ export default function Event(props) {
               <Typography gutterBottom variant="h5" component="div">
                 {props.evento.title}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" noWrap color="text.secondary">
                 {props.evento.desc}
               </Typography>
             </CardContent>

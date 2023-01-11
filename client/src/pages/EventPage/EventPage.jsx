@@ -32,6 +32,10 @@ export default function EventPage() {
     const newItem = {
       idTicket: ticket.idTicket,
       idUser: userID,
+      eventTitle: evento.title,
+      ticketTitle: ticket.title,
+      ticketDate: ticket.date,
+      ticketPrice: ticket.price,
     };
     const res = await axios.post(urlAddToCart, newItem).then(
       handleOpenSnackBar(),
@@ -43,17 +47,17 @@ export default function EventPage() {
   };
 
   const getDataEvent = async () => {
-    console.log(urlEvents);
+    // console.log(urlEvents);
     const res = await axios.get(urlEvents);
     if (!res) return;
     setEvento(res.data);
   };
   const getDataTicketByEvent = async () => {
-    console.log(urlTickets);
+    // console.log(urlTickets);
     const res = await axios.get(urlTickets);
     if (!res) return;
     setTicketByEvent(res.data);
-    console.log(res.data);
+    // console.log(res.data);
   };
   // const getDataTicketByID = async () => {
   //   console.log(urlTicketByID);
@@ -81,7 +85,7 @@ export default function EventPage() {
       <Snackbar
         open={snackbarOpen}
         onClose={handleCloseSnackBar}
-        autoHideDuration={2000}
+        autoHideDuration={1000}
       >
         <Alert severity="success" sx={{ width: "100%" }}>
           Bilhete adicionado ao carrinho!
