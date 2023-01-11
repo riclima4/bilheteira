@@ -9,6 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+
 import Footer from "../../components/Footer/Footer";
 import { useParams } from "react-router-dom";
 import festivalImg from "../../assets/festivalEx.jpg";
@@ -80,7 +81,7 @@ export default function EventPageAdmin() {
   useEffect(() => {
     getDataEvent();
     getDataTicketByEvent();
-  });
+  }, []);
 
   return (
     <div className="page-container">
@@ -276,8 +277,8 @@ export default function EventPageAdmin() {
                 fullWidth
                 select
               >
-                <option value="1">Sim</option>
-                <option value="0">Não</option>
+                <MenuItem value="1">Sim</MenuItem>
+                <MenuItem value="0">Não</MenuItem>
               </TextField>
             </div>
             <div className="flex inputEvent">

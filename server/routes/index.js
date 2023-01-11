@@ -35,6 +35,8 @@ import {
 import { authRequired } from "../utils/jwt.js";
 import {
   addNewCartItem,
+  deleteAllCart,
+  deleteCartItem,
   getALLCart,
   getALLCartbyUser,
 } from "../controllers/cart.js";
@@ -76,6 +78,8 @@ routes.put("/deleteHistory/:id", deleteHistory);
 routes.get("/cart", getALLCart);
 routes.get("/userCart/:idUser", getALLCartbyUser);
 routes.post("/newCart/:idEvent", addNewCartItem);
+routes.delete("/deleteCart/:idCart", deleteCartItem);
+routes.delete("/deleteAllCart/:idUser", deleteAllCart);
 
 routes.post("/auth", login);
 export { routes };

@@ -20,7 +20,22 @@ const CartModule = dbInstance.define("cart", {
       notEmpty: true,
     },
   },
-
+  eventTitle: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  ticketTitle: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  ticketDate: {
+    type: Sequelize.DATEONLY,
+    allowNull: false,
+  },
+  ticketPrice: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+  },
   idUser: {
     type: Sequelize.INTEGER,
     references: {

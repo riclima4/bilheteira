@@ -32,6 +32,10 @@ export default function EventPage() {
     const newItem = {
       idTicket: ticket.idTicket,
       idUser: userID,
+      eventTitle: evento.title,
+      ticketTitle: ticket.title,
+      ticketDate: ticket.date,
+      ticketPrice: ticket.price,
     };
     const res = await axios.post(urlAddToCart, newItem).then(
       handleOpenSnackBar(),

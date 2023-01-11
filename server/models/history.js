@@ -28,6 +28,7 @@ const HistoryModule = dbInstance.define("history", {
     type: Sequelize.DATEONLY,
     allowNull: false,
   },
+
   idUser: {
     type: Sequelize.INTEGER,
     references: {

@@ -8,8 +8,13 @@ export default function History() {
   const [userID, setUserID] = useState();
   const [historico, setHistorico] = useState([]);
   const urlHistorico = "http://localhost:4242/api/history";
-  const urlTicketByID = "http://localhost:4242/api/tickets/";
 
+  const getDataHistory = async () => {
+    const res = await axios.get(`${urlHistorico}/${userID}`);
+    if (!res) return;
+    setHistorico(res.data);
+    console.log(res.data);
+  };
   useEffect(() => {
     const hasToken = localStorage.getItem("token");
     if (hasToken) {
@@ -18,13 +23,6 @@ export default function History() {
       getDataHistory();
     }
   }, []);
-  const getDataHistory = async () => {
-    const res = await axios.get(`${urlHistorico}/${userID}`);
-    if (!res) return;
-    setHistorico(res.data);
-    console.log(res.data);
-  };
-
   return (
     <>
       <div className="flex tituloSection">
